@@ -1,1268 +1,377 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f5dce4">
-<title>Chrizza's World ♡</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<style>
-:root {
---bg-1: #fdf6f8;
---bg-2: #f8e8ee;
---rose: #d97b9c;
---rose-deep: #a6466b;
---rose-soft: #f5d8e3;
---gold: #d4a373;
---ink: #3d2933;
---muted: #7d626f;
---glass: rgba(255, 255, 255, 0.82);
---glass-border: rgba(235, 195, 210, 0.75);
---serif: "Cormorant Garamond", Georgia, serif;
---sans: "Plus Jakarta Sans", sans-serif;
---script: "Caveat", cursive;
-}
-​* { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-body {
-margin: 0;
-font-family: var(--sans);
-color: var(--ink);
-background: linear-gradient(135deg, #fdf7f9 0%, #f9e9ef 48%, #f5e6e0 100%);
-line-height: 1.65;
-overflow-x: hidden;
-}
-​.hidden { display: none !important; }
-a { color: inherit; text-decoration: none; }
-button, input, select { font: inherit; }
-​#petals-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-.bg-orb {
-position: fixed; border-radius: 50%; filter: blur(95px); pointer-events: none; z-index: 0; opacity: 0.45;
-animation: floatOrb 14s ease-in-out infinite alternate;
-}
-.orb-1 { width: 420px; height: 420px; background: #f7c6d8; top: -80px; left: -100px; }
-.orb-2 { width: 380px; height: 380px; background: #f3d5c0; bottom: 10%; right: -90px; animation-delay: -4s; }
-.orb-3 { width: 300px; height: 300px; background: #eab8ce; top: 45%; left: 35%; animation-delay: -8s; }
-​@keyframes floatOrb {
-0% { transform: translate(0, 0) scale(1); }
-100% { transform: translate(30px, 25px) scale(1.08); }
-}
-​.glass-panel {
-background: var(--glass);
-backdrop-filter: blur(18px);
--webkit-backdrop-filter: blur(18px);
-border: 1px solid var(--glass-border);
-box-shadow: 0 20px 50px rgba(145, 75, 102, 0.1);
-}
-​.eyebrow {
-display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose-deep); margin-bottom: 10px;
-}
-​.btn-romantic {
-display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-background: linear-gradient(135deg, #c25980 0%, #9e3d62 100%); color: #fff; border: none; border-radius: 999px;
-padding: 14px 26px; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 0 10px 25px rgba(166, 70, 107, 0.3);
-transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn-romantic:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(166, 70, 107, 0.4); }
-​.btn-outline {
-display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.7);
-border: 1px solid #dfb4c5; color: var(--rose-deep); border-radius: 999px; padding: 13px 24px; font-weight: 700; font-size: 14px; transition: 0.2s;
-}
-.btn-outline:hover { background: #fff; transform: translateY(-2px); }
-​/* Gate */
-.gate { position: relative; z-index: 2; min-height: 100svh; display: grid; place-items: center; padding: 24px; }
-.gate-card { width: min(100%, 460px); border-radius: 32px; padding: 48px 32px; text-align: center; }
-.wax-seal {
-width: 54px; height: 54px; margin: 0 auto 18px; border-radius: 50%;
-background: radial-gradient(circle at 30% 30%, #d46a90, #8f2d52); color: #fff; font-size: 24px;
-display: grid; place-items: center; box-shadow: 0 8px 20px rgba(143, 45, 82, 0.35);
-}
-.wax-seal.large { width: 68px; height: 68px; font-size: 30px; margin-bottom: 22px; }
-.gate h1 { font: 700 clamp(44px, 7vw, 62px)/1.05 var(--serif); margin: 0; }
-.gate h1 em { color: var(--rose-deep); font-style: italic; }
-.gate-copy { color: var(--muted); font-size: 14px; margin: 16px 0 26px; }
-.gate-form { display: grid; gap: 12px; }
-.gate input {
-width: 100%; padding: 15px 18px; border-radius: 14px; border: 1px solid #e3bfd0; background: rgba(255,255,255,0.9); text-align: center; font-size: 15px; outline: none;
-}
-.gate input:focus { border-color: var(--rose-deep); box-shadow: 0 0 0 4px rgba(217, 123, 156, 0.15); }
-.gate-error { color: #b93858; font-size: 13px; min-height: 20px; margin: 8px 0 4px; font-weight: 600; }
-.gate-hint { font-size: 11px; color: var(--muted); }
-​/* Topbar */
-.site { position: relative; z-index: 1; }
-.topbar {
-position: sticky; top: 0; z-index: 30; height: 74px; padding: 0 clamp(20px, 6vw, 90px);
-display: flex; align-items: center; justify-content: space-between; background: rgba(253, 246, 248, 0.85);
-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(230, 190, 206, 0.5);
-}
-.brand { font: 700 22px var(--serif); letter-spacing: -0.02em; }
-.brand span { color: var(--rose-deep); }
-.topbar nav { display: flex; gap: 18px; }
-.nav-link { font-size: 12px; font-weight: 600; color: var(--muted); transition: 0.2s; white-space: nowrap; }
-.nav-link:hover, .nav-link.active { color: var(--rose-deep); }
-.pill-btn { border: 1px solid #e2bccb; background: #fff; color: var(--rose-deep); border-radius: 999px; padding: 7px 14px; font-size: 12px; font-weight: 700; cursor: pointer; }
-.menu-toggle { display: none; border: 1px solid #e2bccb; background: #fff; border-radius: 10px; padding: 6px 12px; color: var(--rose-deep); font-size: 18px; }
-​.section-shell { padding-left: clamp(20px, 7vw, 120px); padding-right: clamp(20px, 7vw, 120px); }
-​/* Hero */
-.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 48px; padding-top: 64px; padding-bottom: 64px; }
-.badge-romantic {
-display: inline-block; background: rgba(255,255,255,0.85); border: 1px solid #e7c2d1; color: var(--rose-deep);
-font-size: 11px; font-weight: 700; letter-spacing: 0.15em; padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
-}
-.hero h1 { font: 700 clamp(48px, 6.5vw, 82px)/1.03 var(--serif); margin: 0; letter-spacing: -0.02em; }
-.hero h1 em { color: var(--rose-deep); font-style: italic; font-weight: 600; }
-.hero-sub { font-size: 15px; color: var(--muted); max-width: 500px; margin: 22px 0 28px; }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-.hero-signature { font: 700 24px var(--script); color: var(--rose-deep); margin-top: 28px; }
-​.hero-visual { display: grid; place-items: center; }
-.polaroid-stack { position: relative; width: min(340px, 85%); height: 400px; }
-.polaroid {
-position: absolute; inset: 0; background: #fff; padding: 14px 14px 48px; border-radius: 16px;
-box-shadow: 0 24px 60px rgba(112, 54, 77, 0.18); border: 1px solid #f2dfe6;
-}
-.back-card { transform: rotate(-6deg) translate(-14px, 8px); }
-.gradient-sunset {
-width: 100%; height: 100%; border-radius: 10px; background: linear-gradient(135deg, #f8d5e3, #f3decb);
-display: grid; place-content: center; text-align: center;
-}
-.main-card { transform: rotate(3deg); transition: transform 0.3s; }
-.main-card:hover { transform: rotate(0deg) scale(1.02); }
-.polaroid-photo { width: 100%; height: 100%; border-radius: 10px; overflow: hidden; background: #f8e8ee; }
-.polaroid-photo img { width: 100%; height: 100%; object-fit: cover; }
-.photo-fallback { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; font: italic 22px var(--serif); color: var(--rose-deep); }
-.polaroid-caption { text-align: center; font: 700 21px var(--script); color: var(--rose-deep); margin-top: 10px; }
-.sticker {
-position: absolute; background: #fff; padding: 8px 16px; border-radius: 999px;
-font: 700 18px var(--script); color: var(--rose-deep); box-shadow: 0 10px 25px rgba(130, 62, 88, 0.15); border: 1px solid #f0d5e0;
-}
-.sticker-1 { top: -12px; right: -16px; transform: rotate(8deg); }
-.sticker-2 { bottom: 20px; left: -24px; transform: rotate(-7deg); }
-​/* Counter & ECG Heartbeat */
-.counter-banner { padding-bottom: 40px; }
-.counter-grid { border-radius: 24px; padding: 26px 32px; text-align: center; }
-.counter-boxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 10px; margin-bottom: 24px; }
-.c-box { background: rgba(255, 255, 255, 0.75); border: 1px solid #edd2dd; border-radius: 16px; padding: 16px 10px; }
-.c-box strong { display: block; font: 700 clamp(28px, 4vw, 42px)/1 var(--serif); color: var(--rose-deep); }
-.c-box span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); font-weight: 600; }
-​.ecg-container {
-background: rgba(255, 255, 255, 0.9); border: 1px solid #ebd0db; border-radius: 16px; padding: 14px 20px; cursor: pointer; transition: 0.2s;
-}
-.ecg-container:hover { border-color: var(--rose-deep); transform: scale(1.01); }
-.ecg-info { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px; }
-.ecg-heart-icon { font-size: 20px; animation: pulseBeat 1.2s infinite; }
-@keyframes pulseBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
-#ecg-text { font-size: 13px; font-weight: 600; color: var(--rose-deep); margin: 0; }
-#ecg-canvas { width: 100%; height: 65px; display: block; }
-​/* Sections */
-.content-section { padding-top: 85px; padding-bottom: 85px; }
-.alt-bg { background: rgba(255, 245, 248, 0.55); border-top: 1px solid rgba(235,195,210,0.4); border-bottom: 1px solid rgba(235,195,210,0.4); }
-.section-heading { text-align: center; max-width: 650px; margin: 0 auto 48px; }
-.section-heading h2 { font: 700 clamp(36px, 5vw, 54px)/1.08 var(--serif); margin: 0 0 12px; }
-.section-heading h2 em { color: var(--rose-deep); font-style: italic; }
-.section-heading p { color: var(--muted); font-size: 14px; margin: 0; }
-​/* Story */
-.story-hero-card { border-radius: 24px; padding: 36px; margin-bottom: 24px; }
-.chapter-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--rose-deep); margin-bottom: 8px; }
-.story-hero-card h3 { font: 700 30px var(--serif); margin: 0 0 18px; }
-.story-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; font-size: 14px; color: #5b444f; }
-​/* Venus Celestial Kiss Section */
-.venus-box { border-radius: 26px; padding: 38px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; margin-top: 40px; }
-.venus-info h3 { font: 700 30px var(--serif); margin: 0 0 12px; }
-.venus-info p { font-size: 14px; color: var(--muted); }
-.venus-canvas-wrap { background: #1a1017; border-radius: 20px; padding: 16px; text-align: center; border: 1px solid #543343; }
-#venus-canvas { width: 100%; height: 220px; display: block; border-radius: 12px; cursor: crosshair; background: #0e070c; }
-.venus-tools { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
-.tool-btn { background: #3d2230; color: #f5d8e3; border: 1px solid #6b4356; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
-.tool-btn:hover { background: #543042; }
-​/* Playlist & Music with Links */
-.playlist-cabinet { border-radius: 24px; padding: 32px; max-width: 900px; margin: 0 auto; }
-.playlist-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
-.playlist-header h3 { font: 700 26px var(--serif); margin: 0; }
-.badge-pill { background: #fff; border: 1px solid #e4bfd0; color: var(--rose-deep); padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; }
-.song-list { display: grid; gap: 12px; }
-.song-item {
-background: rgba(255,255,255,0.85); border: 1px solid #ebd2dd; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-}
-.song-left { display: flex; align-items: center; gap: 16px; }
-.song-icon { font-size: 24px; }
-.song-meta strong { display: block; font-size: 15px; color: var(--ink); font-family: var(--serif); }
-.song-meta p { font-size: 12px; color: var(--muted); margin: 2px 0 0; }
-.song-links { display: flex; gap: 8px; }
-.link-btn {
-font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
-}
-.spotify-link { background: #edf7ed; color: #2e6930; border: 1px solid #b5e2b8; }
-.spotify-link:hover { background: #2e6930; color: #fff; }
-.youtube-link { background: #fdf0f0; color: #a83232; border: 1px solid #f2bcbc; }
-.youtube-link:hover { background: #a83232; color: #fff; }
-.highlight-song { background: linear-gradient(135deg, #fff0f5, #fce4ed); border-color: var(--rose); }
-.song-quote { font: italic 13px var(--serif); color: var(--rose-deep) !important; font-weight: 700; }
-​/* Envelopes */
-.envelope-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.envelope {
-position: relative; background: linear-gradient(165deg, #ffffff 0%, #fcf0f4 100%); border: 1px solid #e7c5d3;
-border-radius: 18px; padding: 22px 18px; text-align: left; cursor: pointer; transition: transform 0.25s, box-shadow 0.25s;
-box-shadow: 0 10px 25px rgba(135, 68, 94, 0.08);
-}
-.envelope:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(166, 70, 107, 0.18); border-color: var(--rose); }
-.env-seal {
-width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #d46a90, #963257);
-color: #fff; font-size: 14px; display: grid; place-items: center; margin-bottom: 14px;
-}
-.envelope strong { display: block; font: 700 19px var(--serif); color: var(--ink); margin-bottom: 4px; }
-.envelope span { font-size: 11px; color: var(--rose-deep); font-weight: 600; }
-​/* Interactive Virtual Cinema Section */
-.cinema-cabinet { border-radius: 26px; padding: 36px; max-width: 950px; margin: 0 auto; }
-.room-selector { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; justify-content: center; }
-.room-btn {
-background: rgba(255,255,255,0.9); border: 1px solid #ebd0db; color: var(--rose-deep);
-padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s;
-}
-.room-btn.active, .room-btn:hover { background: var(--rose-deep); color: #fff; }
-.screen-stage {
-background: #120a10; border-radius: 20px; padding: 24px; border: 2px solid #523041;
-text-align: center; color: #fff; box-shadow: inset 0 0 40px rgba(166,70,107,0.25);
-}
-.movie-screen {
-background: radial-gradient(circle at center, #2e1825 0%, #120a10 85%);
-border-radius: 14px; padding: 48px 20px; border: 1px solid #6b3d54; margin-bottom: 18px; min-height: 220px;
-display: flex; flex-direction: column; align-items: center; justify-content: center;
-}
-.movie-screen h3 { font: 700 28px var(--serif); margin: 0 0 8px; color: #ffebf2; }
-.movie-screen p { font-size: 13px; color: #d6b8c7; max-width: 500px; margin: 0 0 16px; }
-.cinema-controls { display: flex; gap: 12px; justify-content: center; }
-​/* Distance World Map */
-.distance-box { border-radius: 26px; padding: 40px; text-align: center; max-width: 850px; margin: 0 auto; }
-.world-map-visual {
-background: linear-gradient(135deg, #2b1722, #180d15); border-radius: 20px; padding: 30px;
-position: relative; margin: 30px 0 20px; border: 1px solid #633c50; color: #fff; overflow: hidden;
-}
-.world-map-visual::before {
-content: "🌍 Italy ⇄ Philippines"; position: absolute; top: 12px; right: 18px; font-size: 10px; letter-spacing: 0.15em; opacity: 0.6;
-}
-.map-pins-row { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; padding: 0 20px; }
-.map-city-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); padding: 14px 22px; border-radius: 16px; text-align: left; }
-.map-city-card strong { display: block; font-size: 15px; font-family: var(--serif); }
-.map-city-card small { font-size: 11px; opacity: 0.8; }
-.distance-line-box { text-align: center; z-index: 2; }
-.distance-number { font: 700 clamp(24px, 4vw, 36px) var(--serif); color: #ffb3d1; display: block; }
-.distance-sub { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; }
-.map-quote { font: italic 18px var(--serif); color: #ffd6e5; margin-top: 18px; }
-​/* Quiz Section */
-.quiz-cabinet { border-radius: 24px; padding: 32px; max-width: 780px; margin: 0 auto; }
-.quiz-q { font: 700 22px var(--serif); margin: 12px 0 18px; }
-.quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.quiz-option {
-background: rgba(255,255,255,0.85); border: 1px solid #e5c4d2; border-radius: 12px; padding: 14px 16px;
-text-align: left; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s;
-}
-.quiz-option:hover { background: #fff; border-color: var(--rose-deep); }
-.quiz-option.correct { background: #e8f7ec; border-color: #7bc490; color: #246337; }
-.quiz-option.wrong { background: #fdeaea; border-color: #e08b8b; color: #8c2b2b; }
-.quiz-feedback { font-size: 13px; font-weight: 600; color: var(--rose-deep); min-height: 24px; margin: 14px 0; }
-​/* Italian Learning Section */
-.italian-cabinet { border-radius: 24px; padding: 36px; max-width: 850px; margin: 0 auto; }
-.lesson-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 20px; }
-.lesson-card { background: rgba(255,255,255,0.85); border: 1px solid #ebd0db; border-radius: 16px; padding: 20px; text-align: left; }
-.lesson-card strong { font: 700 18px var(--serif); color: var(--rose-deep); display: block; margin-bottom: 6px; }
-.lesson-card p { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
-.vocab-tag { display: inline-block; background: #fae6ee; color: var(--rose-deep); padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; margin-right: 4px; margin-bottom: 4px; }
-​/* Games Cabinets */
-.games-master-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
-.game-cabinet { border-radius: 24px; padding: 24px; display: flex; flex-direction: column; }
-.cabinet-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
-.cabinet-header h3 { font: 700 24px var(--serif); margin: 0; }
-.game-desc { font-size: 12px; color: var(--muted); margin: 0 0 14px; }
-.level-badge {
-background: #fff; border: 1px solid #e5c1d0; color: var(--rose-deep);
-padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap;
-}
-.score-pills { display: flex; gap: 6px; }
-​.canvas-wrapper {
-position: relative; width: 100%; border-radius: 16px; overflow: hidden;
-border: 2px solid #e7c3d2; background: #fdf2f6; box-shadow: inset 0 2px 10px rgba(0,0,0,0.04);
-}
-.canvas-wrapper canvas { width: 100%; height: auto; display: block; touch-action: manipulation; }
-.canvas-toast {
-position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-background: rgba(255, 255, 255, 0.92); border: 1px solid #e5c1d0; padding: 5px 14px;
-border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--rose-deep); white-space: nowrap; pointer-events: none;
-}
-​.arcade-overlay {
-position: absolute; inset: 0; background: rgba(54, 30, 42, 0.72); backdrop-filter: blur(4px);
-display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; padding: 20px;
-}
-.arcade-overlay h4 { font: 700 28px var(--serif); margin: 0 0 6px; }
-.arcade-overlay p { font-size: 12px; opacity: 0.9; margin: 0 0 16px; }
-​.pet-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
-.p-bar-top { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px; }
-.p-track { height: 8px; background: #eed8e1; border-radius: 99px; overflow: hidden; }
-.p-fill { height: 100%; border-radius: 99px; transition: width 0.3s ease; }
-.fill-peach { background: #e5987c; }
-.fill-pink { background: #d66892; }
-.fill-lav { background: #9b7ede; }
-​.cabinet-controls { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: auto; }
-.arcade-pad { grid-template-columns: 1fr 1fr; margin-top: 14px; }
-.game-btn {
-background: #fff; border: 1px solid #e2bccb; color: var(--rose-deep); border-radius: 12px;
-padding: 10px 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.15s;
-}
-.game-btn:hover { background: #fdf0f5; transform: translateY(-2px); }
-.big-pad { padding: 13px; font-size: 14px; background: linear-gradient(180deg, #fff, #faebf1); }
-​/* Closing & Footer */
-.closing { text-align: center; padding-top: 90px; padding-bottom: 90px; }
-.closing h2 { font: 700 clamp(42px, 6vw, 68px)/1.06 var(--serif); margin: 0 0 16px; }
-.closing h2 em { color: var(--rose-deep); }
-.closing p { max-width: 480px; margin: 0 auto; color: var(--muted); font-size: 14px; }
-.signature { font: 700 24px var(--script); color: var(--muted); margin-top: 26px; }
-.signature span { font-size: 34px; color: var(--rose-deep); }
-footer {
-display: flex; justify-content: space-between; padding: 22px clamp(20px, 7vw, 120px);
-border-top: 1px solid rgba(230, 190, 206, 0.5); font-size: 12px; color: var(--muted); background: rgba(255,255,255,0.5);
-}
-​/* Modal */
-.modal { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 20px; }
-.modal-backdrop { position: absolute; inset: 0; background: rgba(45, 22, 33, 0.65); backdrop-filter: blur(6px); }
-.letter-sheet {
-position: relative; width: min(100%, 680px); max-height: 86svh; overflow-y: auto;
-background: #fffcf8; border-radius: 24px; padding: 44px clamp(24px, 5vw, 52px);
-border: 1px solid #ead4c8; box-shadow: 0 30px 90px rgba(25, 10, 17, 0.45);
-}
-.modal-close {
-position: absolute; top: 16px; right: 20px; background: #f8e8ee; border: none;
-width: 36px; height: 36px; border-radius: 50%; font-size: 22px; color: var(--rose-deep); cursor: pointer;
-}
-.letter-sheet h2 { font: 700 32px var(--serif); margin: 0 0 20px; color: var(--ink); }
-.letter-body { white-space: pre-wrap; font: 17px/1.85 var(--serif); color: #543e48; }
-.letter-footer { margin-top: 28px; font: 700 22px var(--script); color: var(--muted); }
-.letter-footer span { font-size: 30px; color: var(--rose-deep); }
-​/* Responsive */
-@media (max-width: 960px) {
-.hero { grid-template-columns: 1fr; text-align: center; }
-.hero-sub { margin-left: auto; margin-right: auto; }
-.hero-actions { justify-content: center; }
-.story-columns, .venus-box, .games-master-grid, .lesson-grid { grid-template-columns: 1fr; }
-.envelope-grid { grid-template-columns: repeat(2, 1fr); }
-.map-pins-row { flex-direction: column; gap: 16px; }
-}
-@media (max-width: 640px) {
-.menu-toggle { display: block; }
-.topbar nav {
-display: none; position: absolute; top: 74px; left: 0; right: 0;
-background: #fdf6f8; flex-direction: column; padding: 20px; border-bottom: 1px solid #e7c5d3; gap: 16px;
-}
-.topbar nav.open { display: flex; }
-.counter-boxes { grid-template-columns: repeat(2, 1fr); }
-.cabinet-controls { grid-template-columns: repeat(2, 1fr); }
-.quiz-grid { grid-template-columns: 1fr; }
-footer { flex-direction: column; text-align: center; gap: 8px; }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5dce4">
+  <title>Chrizza's World ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<canvas id="petals-canvas" aria-hidden="true"></canvas>
-<div class="bg-orb orb-1"></div>
-<div class="bg-orb orb-2"></div>
-<div class="bg-orb orb-3"></div>
-​<!-- SECRET GATE -->
-<section id="gate" class="gate">
-<div class="gate-card glass-panel">
-<div class="wax-seal">♡</div>
-<p class="eyebrow">PRIVATE UNIVERSE · EST. 18.12.2025</p>
-<h1>Chrizza's <em>World</em></h1>
-<p class="gate-copy">Somewhere between a white T-shirt on OmeTV, a random Instagram Reel, and a love that crosses oceans.</p>
-<div class="gate-form">
-<input id="secret-code" type="password" placeholder="Enter our secret word..." autocomplete="off">
-<button id="enter-btn" class="btn-romantic">Unlock Our World <span>✦</span></button>
-</div>
-<p id="gate-error" class="gate-error" aria-live="polite"></p>
-<span class="gate-hint">Hint: your favourite Italian nickname</span>
-</div>
-</section>
-​<!-- MAIN SITE -->
-<div id="site" class="site hidden">
-<header class="topbar">
-<a class="brand" href="#home">Chrizza <span>♡</span> Stefanino</a>
-<button id="menu-toggle" class="menu-toggle" aria-label="Menu">☰</button>
-<nav id="main-nav">
-<a href="#home" class="nav-link active">Home</a>
-<a href="#our-story" class="nav-link">Our Story</a>
-<a href="#memories" class="nav-link">Letters & Music</a>
-<a href="#cinema" class="nav-link">Virtual Cinema</a>
-<a href="#distance" class="nav-link">Distance & Venus</a>
-<a href="#quiz-sec" class="nav-link">Couple Quiz</a>
-<a href="#italian" class="nav-link">Learn Italian</a>
-<a href="#play" class="nav-link">Tortoro</a>
-</nav>
-<button id="sound-toggle" class="pill-btn" title="Toggle Sound">🔊 <span>SFX On</span></button>
-</header>
-​<main>
-<!-- HERO -->
-<section id="home" class="hero section-shell">
-<div class="hero-copy reveal">
-<div class="badge-romantic">✦ ARCORE (ITALY) ⇄ BUGO, CDO (PH)</div>
-<h1>Welcome to
-<em>your universe,</em>
-my Patatina.</h1>
-<p class="hero-sub">Every letter I wrote, our favorite movies, our music with direct Spotify & YouTube links, our couple quiz, and Tortoro in Bugo — all in English, made exclusively for you.</p>
-<div class="hero-actions">
-<a class="btn-romantic" href="#play">Play with Tortoro <span>🐾</span></a>
-<a class="btn-outline" href="#letters">Open My Letters <span>✉</span></a>
-</div>
-<div class="hero-signature">Forever yours, <span>Stefanino ♥</span></div>
-</div>
-​<div class="hero-visual reveal">
-<div class="polaroid-stack">
-<div class="polaroid back-card">
-<div class="polaroid-inner gradient-sunset">
-<span class="big-emoji">🌙✨</span>
-<p>Moon & Venus Celestial Kiss</p>
-</div>
-</div>
-<div class="polaroid main-card">
-<div class="polaroid-photo">
-<img src="assets/images/tortoro.jpg" alt="Tortoro" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-<div class="photo-fallback" style="display:none">
-<span>✿</span>
-<p>Your smile belongs here</p>
-</div>
-</div>
-<div class="polaroid-caption">King Tortoro & his Queen Chrizza ♡</div>
-</div>
-<div class="sticker sticker-1">11 months 💓</div>
-<div class="sticker sticker-2">mi nena ✿</div>
-</div>
-</div>
-</section>
-​<!-- LIVE LOVE COUNTER & ECG HEARTBEAT -->
-<section class="counter-banner section-shell reveal">
-<div class="counter-grid glass-panel">
-<div class="counter-header">
-<span class="eyebrow">LOVING YOU SINCE DECEMBER 18, 2025</span>
-</div>
-<div class="counter-boxes">
-<div class="c-box"><strong id="c-days">0</strong><span>Days</span></div>
-<div class="c-box"><strong id="c-hours">0</strong><span>Hours</span></div>
-<div class="c-box"><strong id="c-mins">0</strong><span>Minutes</span></div>
-<div class="c-box"><strong id="c-secs">0</strong><span>Seconds</span></div>
-</div>
-​<div class="ecg-container" id="ecg-trigger" title="Click to accelerate heartbeat!">
-<div class="ecg-info">
-<span class="ecg-heart-icon">💓</span>
-<p id="ecg-text">Click the heart to feel my pulse...</p>
-</div>
-<canvas id="ecg-canvas" width="500" height="75"></canvas>
-</div>
-</div>
-</section>
-​<!-- OUR STORY -->
-<section id="our-story" class="content-section section-shell">
-<div class="section-heading reveal">
-<span class="eyebrow">CHAPTERS OF US</span>
-<h2>How a random night became <em>my favourite story</em></h2>
-<p>From thousands of kilometers away, you turned my everyday life into something meaningful.</p>
-</div>
-​<div class="story-hero-card glass-panel reveal">
-<div class="chapter-tag">CHAPTER 01 · OMETV & BEYOND</div>
-<h3>It all started with a white T-shirt.</h3>
-<div class="story-columns">
-<p>You were in the dark on OmeTV. I could barely see you, so I illuminated my face with my white T-shirt — and for about two seconds, I saw yours. Then we started talking about movies and hobbies. I recommended <em>The Hangover</em> and flexed my bicep! 😂</p>
-<p>You gave me your Instagram. I didn't text for two days… and <strong>you sent me the first Reel.</strong> When you told me you had watched the movie I recommended, I felt truly listened to. That little detail made me fall for you.</p>
-<p>Months passed with long video calls, falling asleep together, dealing with distance, and choosing each other every single day. From my benzina ⛽ to my safe place, you changed my entire life for the better.</p>
-</div>
-</div>
-</section>
-​<!-- MUSIC & LETTERS -->
-<section id="memories" class="content-section section-shell alt-bg">
-<div class="section-heading reveal">
-<span class="eyebrow">SOUNDTRACK & WORDS</span>
-<h2>Our <em>Music</em> & Letters</h2>
-<p>Chrizza's favorite songs with direct Spotify & YouTube links, and envelopes written straight from my heart.</p>
-</div>
-​<!-- LANY & SPECIAL PLAYLIST WIDGET WITH LINKS -->
-<div class="playlist-cabinet glass-panel reveal">
-<div class="playlist-header">
-<div>
-<span class="eyebrow">CHRIZZA'S SPECIAL PLAYLIST 🎸</span>
-<h3>Our Soundtrack</h3>
-</div>
-<span class="badge-pill">LANY · The Weeknd · Vibes</span>
-</div>
-<div class="song-list">
-<div class="song-item">
-<div class="song-left">
-<span class="song-icon">🎵</span>
-<div class="song-meta">
-<strong>LANY Greatest Hits & Discography</strong>
-<p>Her absolute favourite band playing in the background</p>
-</div>
-</div>
-<div class="song-links">
-<a href="https://open.spotify.com/artist/43ZHCT0cAZbisjO8DGvhPn" target="_blank" class="link-btn spotify-link">Spotify</a>
-<a href="https://www.youtube.com/results?search_query=LANY" target="_blank" class="link-btn youtube-link">YouTube</a>
-</div>
-</div>
-<div class="song-item">
-<div class="song-left">
-<span class="song-icon">🌙</span>
-<div class="song-meta">
-<strong>One of the Girls — The Weeknd</strong>
-<p>Our late-night video call vibe</p>
-</div>
-</div>
-<div class="song-links">
-<a href="https://open.spotify.com/track/7ouMYWpwJ422jRcDASZB7P" target="_blank" class="link-btn spotify-link">Spotify</a>
-<a href="https://www.youtube.com/watch?v=1uW9U7nF3vU" target="_blank" class="link-btn youtube-link">YouTube</a>
-</div>
-</div>
-<div class="song-item">
-<div class="song-left">
-<span class="song-icon">💃</span>
-<div class="song-meta">
-<strong>Gata Only — FloyyMenor, Cris Mj</strong>
-<p>Catchy rhythm & fun memories</p>
-</div>
-</div>
-<div class="song-links">
-<a href="https://open.spotify.com/track/6nTiopli8VtLuGCabSgLlh" target="_blank" class="link-btn spotify-link">Spotify</a>
-<a href="https://www.youtube.com/watch?v=L58v-cZ4gXo" target="_blank" class="link-btn youtube-link">YouTube</a>
-</div>
-</div>
-<div class="song-item highlight-song">
-<div class="song-left">
-<span class="song-icon">✨</span>
-<div class="song-meta">
-<strong>Si No Es Contigo — Louis Tomlinson</strong>
-<p class="song-quote">“Meeting you felt like the first time hearing this intro.”</p>
-</div>
-</div>
-<div class="song-links">
-<a href="https://open.spotify.com/search/Si%20No%20Es%20Contigo%20Louis%20Tomlinson" target="_blank" class="link-btn spotify-link">Spotify</a>
-<a href="https://www.youtube.com/results?search_query=Louis+Tomlinson+Si+No+Es+Contigo" target="_blank" class="link-btn youtube-link">YouTube</a>
-</div>
-</div>
-</div>
-</div>
-​<div id="letters" class="letters-showcase reveal" style="margin-top: 40px;">
-<div id="letter-list" class="envelope-grid"></div>
-</div>
-</section>
-​<!-- INTERACTIVE VIRTUAL CINEMA -->
-<section id="cinema" class="content-section section-shell">
-<div class="section-heading reveal">
-<span class="eyebrow">LONG-DISTANCE MOVIE DATES</span>
-<h2>Virtual <em>Cinema</em></h2>
-<p>Choose a screening room and enjoy our movie nights together across the screen!</p>
-</div>
-​<div class="cinema-cabinet glass-panel reveal">
-<div class="room-selector">
-<button class="room-btn active" data-room="0">Room 1: Comedy & Hangover</button>
-<button class="room-btn" data-room="1">Room 2: Rom-Com & Classics</button>
-<button class="room-btn" data-room="2">Room 3: Zendaya Feature</button>
-<button class="room-btn" data-room="3">Room 4: Thai Zombie Horror</button>
-</div>
-​<div class="screen-stage">
-<div class="movie-screen">
-<h3 id="cinema-title">Una Notte da Leoni (The Hangover)</h3>
-<p id="cinema-desc">The hilarious movie recommendation that started our movie talks!</p>
-<div class="badge-pill" id="cinema-genre" style="background:#3d2030; color:#ffb3d1; border-color:#6e3c56;">Comedy · Date Night</div>
-</div>
-<div class="cinema-controls">
-<a id="cinema-link" href="https://www.google.com/search?q=The+Hangover+watch" target="_blank" class="btn-romantic">Watch Screening 🎬</a>
-<button class="btn-outline" id="cinema-next-btn">Next Screening 🍿</button>
-</div>
-</div>
-</div>
-</section>
-​<!-- DISTANCE MAP & MOON/VENUS KISS -->
-<section id="distance" class="content-section section-shell alt-bg">
-<div class="distance-box glass-panel reveal">
-<div class="section-heading" style="margin-bottom:24px;">
-<span class="eyebrow">KILOMETERS APART, CLOSE AT HEART</span>
-<h2>Arcore ⇄ <em>Bugo, Cagayan de Oro</em></h2>
-<p>Exact distance calculation and our special celestial night.</p>
-</div>
-​<!-- WORLD MAP VISUAL -->
-<div class="world-map-visual">
-<div class="map-pins-row">
-<div class="map-city-card">
-<strong>🇮🇹 Arcore, Italy</strong>
-<small>Stefanino's home</small>
-</div>
-<div class="distance-line-box">
-<span class="distance-number">10,540 km</span>
-<span class="distance-sub">Great Circle Distance</span>
-</div>
-<div class="map-city-card">
-<strong>🇵🇭 Bugo, CDO</strong>
-<small>Chrizza & Tortoro</small>
-</div>
-</div>
-<p class="map-quote">“Every time we video call, the 10,540 kilometers completely disappear.”</p>
-</div>
-​<!-- MOON & VENUS KISS SECTION -->
-<div class="venus-box glass-panel">
-<div class="venus-info">
-<span class="eyebrow">CELESTIAL MEMORY · MOON & VENUS KISS</span>
-<h3>The Night Sky Connected Us</h3>
-<p>When the Moon and Venus had their rare celestial kiss in the night sky on our day, it felt like the universe was winking at us. Even across vast distances, our lights meet in breathtaking beauty.</p>
-<p style="font-size:12px; opacity:0.8; margin-top:8px;">(Try drawing your own moon & stars on the interactive canvas! ✨)</p>
-</div>
-<div class="venus-canvas-wrap">
-<canvas id="venus-canvas" width="360" height="200"></canvas>
-<div class="venus-tools">
-<button class="tool-btn" id="venus-clear">Clear Canvas</button>
-<button class="tool-btn" id="venus-star">Add Star ✨</button>
-</div>
-</div>
-</div>
-</div>
-</section>
-​<!-- COUPLE QUIZ (CHEEKY & FUN ABOUT BRAWL STARS, ETC.) -->
-<section id="quiz-sec" class="content-section section-shell">
-<div class="section-heading reveal">
-<span class="eyebrow">COUPLE TRIVIA</span>
-<h2>Fun & Cheeky <em>Couple Quiz</em></h2>
-<p>Let's see how well Chrizza knows our relationship (and who's better at Brawl Stars)!</p>
-</div>
-​<div class="quiz-cabinet glass-panel reveal">
-<div class="cabinet-header">
-<div>
-<span class="eyebrow">RELATIONSHIP TRIVIA</span>
-<h3>Chrizza & Stefanino Quiz</h3>
-</div>
-<span class="level-badge" id="quiz-progress">1 / 5</span>
-</div>
-<h4 id="quiz-question" class="quiz-q"></h4>
-<div id="quiz-options" class="quiz-grid"></div>
-<p id="quiz-feedback" class="quiz-feedback"></p>
-<button id="quiz-next" class="btn-romantic hidden">Next Question →</button>
-</div>
-</section>
-​<!-- LEARN ITALIAN SECTION (INTERMEDIATE LEVEL) -->
-<section id="italian" class="content-section section-shell alt-bg">
-<div class="italian-cabinet glass-panel reveal">
-<div class="section-heading" style="margin-bottom:20px;">
-<span class="eyebrow">STEFANINO'S ACADEMY</span>
-<h2>Learn Intermediate <em>Italian</em> for Chrizza</h2>
-<p>Since you're dating an Italian, let's level up your vocabulary with romantic and daily phrases!</p>
-</div>
-​<div class="lesson-grid">
-<div class="lesson-card">
-<strong>Lesson 1: Sweet Endearing Terms</strong>
-<p>Phrases to call your favorite Italian boy:</p>
-<div>
-<span class="vocab-tag">Il mio amore (My love)</span>
-<span class="vocab-tag">Tesoro mio (My treasure)</span>
-<span class="vocab-tag">Principe (Prince)</span>
-</div>
-</div>
-<div class="lesson-card">
-<strong>Lesson 2: Deep & Romantic</strong>
-<p>Expressing how much you miss him:</p>
-<div>
-<span class="vocab-tag">Mi manchi da morire (I miss you to death)</span>
-<span class="vocab-tag">Non vedo l'ora (I can't wait)</span>
-<span class="vocab-tag">Per sempre (Forever)</span>
-</div>
-</div>
-<div class="lesson-card">
-<strong>Lesson 3: Daily LDR Life</strong>
-<p>Talking about video calls and distance:</p>
-<div>
-<span class="vocab-tag">Chiamiamoci (Let's call each other)</span>
-<span class="vocab-tag">Buonanotte amore (Goodnight love)</span>
-<span class="vocab-tag">Ti penso sempre (I always think of you)</span>
-</div>
-</div>
-<div class="lesson-card">
-<strong>Lesson 4: Teasing & Fun</strong>
-<p>For when you win at Brawl Stars:</p>
-<div>
-<span class="vocab-tag">Sono la migliore (I am the best)</span>
-<span class="vocab-tag">Sei buffo (You're funny)</span>
-<span class="vocab-tag">Dammi un bacio (Give me a kiss)</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-​<!-- TORTORO'S GAMES -->
-<section id="play" class="content-section section-shell">
-<div class="section-heading reveal">
-<span class="eyebrow">INTERACTIVE ARCADE</span>
-<h2>Tortoro's <em>Playground</em></h2>
-<p>Two full interactive games starring your handsome grey tabby in Bugo!</p>
-</div>
-​<div class="games-master-grid">
-<!-- GAME 1: COZY ROOM -->
-<div class="game-cabinet glass-panel reveal">
-<div class="cabinet-header">
-<div>
-<span class="eyebrow">GAME 01 · VIRTUAL PET</span>
-<h3>Tortoro's Cozy House in Bugo</h3>
-</div>
-<span class="level-badge" id="cozy-level">Affection Lv. 1</span>
-</div>
-<p class="game-desc">Pet Tortoro directly on the screen, toss his yarn ball, feed him fish treats, or switch day/night!</p>
-​<div class="canvas-wrapper">
-<canvas id="cozy-canvas" width="600" height="340"></canvas>
-<div class="canvas-toast" id="cozy-toast">Tap Tortoro to pet him! 🐾</div>
-</div>
-​<div class="pet-bars">
-<div class="p-bar">
-<div class="p-bar-top"><span>🐟 Hunger</span><span id="stat-hunger">85%</span></div>
-<div class="p-track"><div class="p-fill fill-peach" id="bar-hunger" style="width:85%"></div></div>
-</div>
-<div class="p-bar">
-<div class="p-bar-top"><span>💖 Happiness</span><span id="stat-happy">90%</span></div>
-<div class="p-track"><div class="p-fill fill-pink" id="bar-happy" style="width:90%"></div></div>
-</div>
-<div class="p-bar">
-<div class="p-bar-top"><span>⚡ Energy</span><span id="stat-energy">80%</span></div>
-<div class="p-track"><div class="p-fill fill-lav" id="bar-energy" style="width:80%"></div></div>
-</div>
-</div>
-​<div class="cabinet-controls">
-<button class="game-btn" id="act-feed">🐟 Feed Fish</button>
-<button class="game-btn" id="act-toy">🧶 Toss Yarn</button>
-<button class="game-btn" id="act-sleep">💤 Nap / Wake</button>
-<button class="game-btn" id="act-time">🌅 Day / Sunset</button>
-</div>
-</div>
-​<!-- GAME 2: RUNNER -->
-<div class="game-cabinet glass-panel reveal">
-<div class="cabinet-header">
-<div>
-<span class="eyebrow">GAME 02 · ARCADE RUNNER</span>
-<h3>Tortoro's Bugo Adventure</h3>
-</div>
-<div class="score-pills">
-<span class="level-badge">Score: <strong id="arc-score">0</strong></span>
-<span class="level-badge best">Best: <strong id="arc-best">0</strong></span>
-</div>
-</div>
-<p class="game-desc">Double-jump over crabs & coconuts, duck under birds, and grab golden fish & love magnets!</p>
-​<div class="canvas-wrapper">
-<canvas id="arcade-canvas" width="600" height="340"></canvas>
-<div id="arcade-overlay" class="arcade-overlay">
-<h4>Ready to Explore Bugo?</h4>
-<p>Jump (↑ / Space / Tap) · Double Jump · Duck (↓)</p>
-<button class="btn-romantic" id="arc-start-btn">Start Adventure 🐾</button>
-</div>
-</div>
-​<div class="cabinet-controls arcade-pad">
-<button class="game-btn big-pad" id="pad-jump">⬆ Jump (x2)</button>
-<button class="game-btn big-pad" id="pad-duck">⬇ Duck / Slide</button>
-</div>
-</div>
-</div>
-</section>
-​<!-- CLOSING -->
-<section class="closing section-shell reveal">
-<div class="wax-seal large">♡</div>
-<span class="eyebrow">AND THIS IS ONLY THE BEGINNING</span>
-<h2>More chapters,
-<em>more memories,</em>
-more us.</h2>
-<p>From a random night on OmeTV to eleven months of choosing each other. I can't wait to see what we write next.</p>
-<div class="signature">Always yours,
-<span>Stefanino ♡</span></div>
-</section>
-</main>
-​<footer>
-<span>Crafted with all my heart for Chrizza ♡</span>
-<span>Chrizza's World · Italy ⇄ Philippines (10,540 km)</span>
-</footer>
-</div>
-​<!-- LETTER MODAL -->
-<div id="letter-modal" class="modal hidden" role="dialog" aria-modal="true">
-<div class="modal-backdrop" data-close="true"></div>
-<article class="letter-sheet">
-<button class="modal-close" id="close-letter" aria-label="Close">×</button>
-<div class="sheet-top">
-<span class="eyebrow">A LETTER FROM STEFANINO</span>
-<h2 id="modal-title"></h2>
-</div>
-<div id="modal-letter-body" class="letter-body"></div>
-<div class="letter-footer">
-<p>Always yours,
-<span>Stefanino ♡</span></p>
-</div>
-</article>
-</div>
-​<script src="js/letters.js"></script>
-<script>
-(() => {
-const $ = s => document.querySelector(s);
-​// --- AUDIO SYNTHESIZER ---
-let sfxEnabled = true;
-const AudioCtx = window.AudioContext || window.webkitAudioContext;
-let audioCtx = null;
-​function playTone(freq, type = "sine", duration = 0.15, slideTo = null, vol = 0.08) {
-if (!sfxEnabled) return;
-try {
-if (!audioCtx) audioCtx = new AudioCtx();
-if (audioCtx.state === "suspended") audioCtx.resume();
-const osc = audioCtx.createOscillator();
-const gain = audioCtx.createGain();
-osc.type = type;
-osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, audioCtx.currentTime + duration);
-gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-osc.connect(gain);
-gain.connect(audioCtx.destination);
-osc.start();
-osc.stop(audioCtx.currentTime + duration);
-} catch (e) {}
-}
-​function sfxMeow() {
-playTone(520, "triangle", 0.28, 680, 0.09);
-setTimeout(() => playTone(680, "triangle", 0.22, 460, 0.07), 140);
-}
-function sfxHeart() {
-playTone(587.33, "sine", 0.12, null, 0.08);
-setTimeout(() => playTone(880, "sine", 0.2, null, 0.08), 80);
-}
-function sfxJump() { playTone(260, "sine", 0.16, 540, 0.07); }
-function sfxHit() { playTone(180, "sawtooth", 0.25, 70, 0.09); }
-​$("#sound-toggle").addEventListener("click", () => {
-sfxEnabled = !sfxEnabled;
-$("#sound-toggle").innerHTML = sfxEnabled ? "🔊 <span>SFX On</span>" : "🔇 <span>SFX Off</span>";
-if (sfxEnabled) sfxHeart();
-});
-​// --- PETALS & HEARTS BACKGROUND ---
-const pCanvas = $("#petals-canvas");
-const pCtx = pCanvas.getContext("2d");
-let petals = [];
-function resizePetals() {
-pCanvas.width = window.innerWidth;
-pCanvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resizePetals);
-resizePetals();
-​for (let i = 0; i < 28; i++) {
-petals.push({
-x: Math.random() * window.innerWidth,
-y: Math.random() * window.innerHeight,
-r: 4 + Math.random() * 6,
-vy: 0.4 + Math.random() * 0.8,
-vx: -0.3 + Math.random() * 0.6,
-rot: Math.random() * Math.PI * 2,
-vrot: -0.02 + Math.random() * 0.04,
-isHeart: i % 4 === 0
-});
-}
-​function animatePetals() {
-pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-petals.forEach(p => {
-p.y += p.vy;
-p.x += p.vx + Math.sin(p.y * 0.01) * 0.3;
-p.rot += p.vrot;
-if (p.y > pCanvas.height + 20) { p.y = -20; p.x = Math.random() * pCanvas.width; }
-pCtx.save();
-pCtx.translate(p.x, p.y);
-pCtx.rotate(p.rot);
-pCtx.fillStyle = p.isHeart ? "rgba(217, 108, 148, 0.28)" : "rgba(244, 178, 202, 0.38)";
-if (p.isHeart) {
-pCtx.font = ${p.r * 2.2}px serif;
-pCtx.fillText("♥", -p.r, p.r);
-} else {
-pCtx.beginPath();
-pCtx.ellipse(0, 0, p.r, p.r * 0.55, 0, 0, Math.PI * 2);
-pCtx.fill();
-}
-pCtx.restore();
-});
-requestAnimationFrame(animatePetals);
-}
-animatePetals();
-​// --- ECG HEARTBEAT WIDGET ---
-const ecgCanvas = $("#ecg-canvas");
-const ecgCtx = ecgCanvas.getContext("2d");
-let ecgPhase = 0, ecgSpeed = 2.2, ecgAcceleratedTimer = 0;
-​$("#ecg-trigger").addEventListener("click", () => {
-sfxHeart();
-ecgSpeed = 6.5;
-ecgAcceleratedTimer = 140;
-$("#ecg-text").textContent = "“Somehow, you make my heart beat differently.” ♡";
-});
-​function drawECG() {
-ecgCtx.clearRect(0, 0, ecgCanvas.width, ecgCanvas.height);
-ecgCtx.strokeStyle = "#a6466b";
-ecgCtx.lineWidth = 2.5;
-ecgCtx.lineJoin = "round";
-ecgCtx.beginPath();
-​if (ecgAcceleratedTimer > 0) {
-ecgAcceleratedTimer--;
-if (ecgAcceleratedTimer === 0) ecgSpeed = 2.2;
-}
-​ecgPhase += ecgSpeed;
-const w = ecgCanvas.width, h = ecgCanvas.height, midY = h / 2;
-​for (let x = 0; x < w; x++) {
-const p = (x + ecgPhase) % 180;
-let y = midY;
-if (p > 75 && p < 90) y = midY - 30;
-else if (p >= 90 && p < 100) y = midY + 12;
-else if (p >= 100 && p < 108) y = midY - 38;
-else if (p >= 108 && p < 118) y = midY + 22;
-else if (p >= 135 && p < 155) y = midY - 10;
-​if (x === 0) ecgCtx.moveTo(x, y);
-else ecgCtx.lineTo(x, y);
-}
-ecgCtx.stroke();
-requestAnimationFrame(drawECG);
-}
-drawECG();
-​// --- GATE & NAVIGATION ---
-const gate = $("#gate"), site = ("#site");
-function enter() {
-if (("#secret-code").value.trim().toUpperCase() === "PATATINA") {
-sfxHeart();
-gate.classList.add("hidden");
-site.classList.remove("hidden");
-sessionStorage.setItem("cw-entered", "yes");
-window.scrollTo(0, 0);
-} else {
-sfxHit();
-$("#gate-error").textContent = "Not quite, my love. Try again ♡";
-}
-}
-$("#enter-btn").addEventListener("click", enter);
-$("#secret-code").addEventListener("keydown", e => { if (e.key === "Enter") enter(); });
-if (sessionStorage.getItem("cw-entered") === "yes") {
-gate.classList.add("hidden");
-site.classList.remove("hidden");
-}
-​$("#menu-toggle").addEventListener("click", () => $("#main-nav").classList.toggle("open"));
-document.querySelectorAll(".nav-link").forEach(a => a.addEventListener("click", () => $("#main-nav").classList.remove("open")));
-​// --- LIVE LOVE COUNTER ---
-const startDate = new Date(2025, 11, 18, 0, 0, 0);
-function updateCounter() {
-const diff = Math.max(0, Date.now() - startDate.getTime());
-const days = Math.floor(diff / 86400000);
-const hours = Math.floor((diff / 3600000) % 24);
-const mins = Math.floor((diff / 60000) % 60);
-const secs = Math.floor((diff / 1000) % 60);
-$("#c-days").textContent = days;
-$("#c-hours").textContent = String(hours).padStart(2, "0");
-$("#c-mins").textContent = String(mins).padStart(2, "0");
-$("#c-secs").textContent = String(secs).padStart(2, "0");
-}
-setInterval(updateCounter, 1000);
-updateCounter();
-​// --- LETTERS ---
-const letters = window.CHRIZZA_LETTERS || [];
-$("#letter-list").innerHTML = letters.map((l, i) => <button class="envelope" data-letter="${i}"> <div class="env-seal">♡</div> <strong>${l.month}</strong> <span>${l.date} · Read Letter ↗</span> </button>).join("");
-​$("#letter-list").addEventListener("click", e => {
-const btn = e.target.closest("[data-letter]");
-if (!btn) return;
-sfxHeart();
-const l = letters[Number(btn.dataset.letter)];
-$("#modal-title").textContent = l.month;
-$("#modal-letter-body").textContent = l.text;
-$("#letter-modal").classList.remove("hidden");
-});
-​function closeModal() { $("#letter-modal").classList.add("hidden"); }
-$("#close-letter").addEventListener("click", closeModal);
-$("#letter-modal").addEventListener("click", e => { if (e.target.dataset.close) closeModal(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
-​// --- VIRTUAL CINEMA ROOMS ---
-const movies = [
-{ title: "Una Notte da Leoni (The Hangover)", desc: "The hilarious movie recommendation that started our movie talks!", genre: "Comedy · Date Night", link: "https://www.google.com/search?q=The+Hangover+watch" },
-{ title: "American Pie & Amici di Letto", desc: "Classic laughs and cozy long-distance movie dates.", genre: "Rom-Com · Comedy", link: "https://www.google.com/search?q=American+Pie+watch" },
-{ title: "Zendaya Featured Films", desc: "Enjoying incredible cinema and great acting together.", genre: "Drama · Romance", link: "https://www.google.com/search?q=Zendaya+movies+watch" },
-{ title: "Thai Zombie Horror Movies", desc: "Spooky, intense horror nights across the screen!", genre: "Horror · Thriller", link: "https://www.google.com/search?q=Thai+horror+movies+watch" }
-];
-let currentMovie = 0;
-function setMovieRoom(idx) {
-currentMovie = idx;
-const m = movies[idx];
-$("#cinema-title").textContent = m.title;
-$("#cinema-desc").textContent = m.desc;
-$("#cinema-genre").textContent = m.genre;
-$("#cinema-link").href = m.link;
-document.querySelectorAll(".room-btn").forEach((b, i) => b.classList.toggle("active", i === idx));
-sfxHeart();
-}
-document.querySelectorAll(".room-btn").forEach((b, i) => b.addEventListener("click", () => setMovieRoom(i)));
-$("#cinema-next-btn").addEventListener("click", () => setMovieRoom((currentMovie + 1) % movies.length));
-​// --- VENUS CANVAS DRAWING ---
-const vCanvas = $("#venus-canvas"), vCtx = vCanvas.getContext("2d");
-let drawing = false;
-function drawSkyScene() {
-vCtx.fillStyle = "#0e070c";
-vCtx.fillRect(0, 0, vCanvas.width, vCanvas.height);
-// Moon & Venus
-vCtx.fillStyle = "#fffaed";
-vCtx.beginPath(); vCtx.arc(100, 70, 24, 0, Math.PI * 2); vCtx.fill();
-vCtx.fillStyle = "#ffb3d1";
-vCtx.beginPath(); vCtx.arc(155, 75, 10, 0, Math.PI * 2); vCtx.fill();
-vCtx.font = "14px serif";
-vCtx.fillStyle = "#fff";
-vCtx.fillText("✨ Moon & Venus Kiss", 80, 135);
-}
-drawSkyScene();
-​vCanvas.addEventListener("pointerdown", e => { drawing = true; addStar(e); });
-vCanvas.addEventListener("pointermove", e => { if (drawing) addStar(e); });
-window.addEventListener("pointerup", () => { drawing = false; });
-​function addStar(e) {
-const rect = vCanvas.getBoundingClientRect();
-const x = (e.clientX - rect.left) * (vCanvas.width / rect.width);
-const y = (e.clientY - rect.top) * (vCanvas.height / rect.height);
-vCtx.fillStyle = "#ffb3d1";
-vCtx.font = "16px serif";
-vCtx.fillText("★", x, y);
-}
-$("#venus-clear").addEventListener("click", drawSkyScene);
-$("#venus-star").addEventListener("click", () => {
-vCtx.fillStyle = "#ffe184";
-vCtx.font = "20px serif";
-vCtx.fillText("✨", 50 + Math.random() * 260, 30 + Math.random() * 140);
-sfxHeart();
-});
-​// --- CHEEKY COUPLE QUIZ ---
-const questions = [
-{ q: "Who is better at Brawl Stars?", a: ["Stefanino (obviously)", "Chrizza (she carries him)", "Both are terrible", "Tortoro"], c: 1, why: "Chrizza is the true pro player! AHAHAHA." },
-{ q: "Where did our story begin?", a: ["Instagram", "OmeTV (with a white T-shirt)", "A movie theater", "At the gym"], c: 1, why: "OmeTV — one random night, a white T-shirt and two seconds of your face." },
-{ q: "What did Stefanino use to illuminate his face?", a: ["A phone flashlight", "His white T-shirt", "A candle", "A lamp"], c: 1, why: "His white T-shirt! The most legendary flashlight ever." },
-{ q: "Who sent the first Instagram message?", a: ["Stefanino", "Chrizza", "Both at the same time", "Nobody"], c: 1, why: "You did! You sent me that Reel after two days." },
-{ q: "When did we officially become a couple?", a: ["18 November 2025", "18 December 2025", "18 January 2026", "14 February 2026"], c: 1, why: "18 December 2025 — right after a Reel. AHAHAHA." }
-];
-let qi = 0, answered = false, qScore = 0;
-function renderQuiz() {
-const q = questions[qi];
-$("#quiz-progress").textContent = ${qi + 1} / ${questions.length};
-$("#quiz-question").textContent = q.q;
-$("#quiz-feedback").textContent = "";
-$("#quiz-next").classList.add("hidden");
-answered = false;
-$("#quiz-options").innerHTML = q.a.map((v, i) => <button class="quiz-option" data-ans="${i}">${v}</button>).join("");
-}
-$("#quiz-options").addEventListener("click", e => {
-const b = e.target.closest("[data-ans]");
-if (!b || answered) return;
-answered = true;
-const q = questions[qi], ans = Number(b.dataset.ans);
-if (ans === q.c) {
-qScore++;
-b.classList.add("correct");
-sfxHeart();
-$("#quiz-feedback").textContent = "Spot on! ♡ " + q.why;
-} else {
-b.classList.add("wrong");
-$("#quiz-options").querySelectorAll("button")[q.c].classList.add("correct");
-sfxHit();
-$("#quiz-feedback").textContent = q.why;
-}
-$("#quiz-next").textContent = qi === questions.length - 1 ? "See Final Score ♡" : "Next Question →";
-$("#quiz-next").classList.remove("hidden");
-});
-$("#quiz-next").addEventListener("click", () => {
-if (qi < questions.length - 1) { qi++; renderQuiz(); }
-else {
-$("#quiz-question").textContent = You scored ${qScore} / ${questions.length}!;
-$("#quiz-options").innerHTML = "";
-$("#quiz-feedback").textContent = qScore === 5 ? "Perfection! You know every detail of our relationship ♡" : "Every memory with you is my favourite!";
-$("#quiz-next").textContent = "Play Quiz Again";
-$("#quiz-next").onclick = () => { qi = 0; qScore = 0; $("#quiz-next").onclick = null; renderQuiz(); };
-}
-});
-renderQuiz();
-​// --- HELPER: DRAW TORTORO ---
-function drawTortoro(ctx, x, y, scale = 1, state = "idle", frame = 0, facing = 1) {
-ctx.save();
-ctx.translate(x, y);
-ctx.scale(facing * scale, scale);
-​const bounce = state === "run" ? Math.sin(frame * 0.35) * 4 : (state === "idle" ? Math.sin(frame * 0.08) * 1.5 : 0);
-const squashY = state === "duck" ? 0.65 : 1;
-ctx.scale(1, squashY);
-​// Tail
-ctx.strokeStyle = "#7a7d85"; ctx.lineWidth = 7; ctx.lineCap = "round";
-ctx.beginPath();
-const tailWag = Math.sin(frame * 0.12) * 10;
-ctx.moveTo(-22, -8 + bounce); ctx.quadraticCurveTo(-42, -26 + tailWag, -34, -42 + tailWag);
-ctx.stroke();
-​// Body
-ctx.fillStyle = "#9599a3";
-ctx.beginPath(); ctx.ellipse(0, -14 + bounce, 26, 20, 0, 0, Math.PI * 2); ctx.fill();
-​// Paws
-ctx.fillStyle = "#e6e8ed";
-const legSwing = state === "run" ? Math.sin(frame * 0.4) * 8 : 0;
-ctx.beginPath(); ctx.arc(-12 + legSwing, 4, 6, 0, Math.PI * 2); ctx.arc(12 - legSwing, 4, 6, 0, Math.PI * 2); ctx.fill();
-​// Head
-ctx.fillStyle = "#9fa3ad";
-ctx.beginPath(); ctx.arc(16, -30 + bounce, 19, 0, Math.PI * 2); ctx.fill();
-​// Ears
-ctx.fillStyle = "#838791";
-ctx.beginPath();
-ctx.moveTo(4, -44 + bounce); ctx.lineTo(8, -60 + bounce); ctx.lineTo(18, -46 + bounce);
-ctx.moveTo(18, -46 + bounce); ctx.lineTo(28, -59 + bounce); ctx.lineTo(31, -41 + bounce);
-ctx.fill();
-​// Inner pink ears
-ctx.fillStyle = "#eba8be";
-ctx.beginPath();
-ctx.moveTo(7, -45 + bounce); ctx.lineTo(9, -55 + bounce); ctx.lineTo(15, -46 + bounce);
-ctx.moveTo(20, -46 + bounce); ctx.lineTo(27, -55 + bounce); ctx.lineTo(29, -43 + bounce);
-ctx.fill();
-​// Eyes
-ctx.fillStyle = "#8cb8de";
-ctx.beginPath(); ctx.arc(12, -31 + bounce, 4.2, 0, Math.PI * 2); ctx.arc(24, -31 + bounce, 4.2, 0, Math.PI * 2); ctx.fill();
-ctx.fillStyle = "#22252a";
-ctx.beginPath(); ctx.arc(12.5, -31 + bounce, 2, 0, Math.PI * 2); ctx.arc(24.5, -31 + bounce, 2, 0, Math.PI * 2); ctx.fill();
-​// Nose
-ctx.fillStyle = "#e88ca8";
-ctx.beginPath(); ctx.arc(19, -25 + bounce, 2.5, 0, Math.PI * 2); ctx.fill();
-​ctx.restore();
-}
-​// --- GAME 1: COZY ROOM SIMULATOR ---
-const cCanvas = $("#cozy-canvas");
-const cCtx = cCanvas.getContext("2d");
-let pet = {
-x: 280, y: 265, targetX: 280, facing: 1,
-hunger: 85, happy: 90, energy: 80, xp: 0, level: 1,
-state: "idle", stateTimer: 0, isSunset: false, particles: [],
-yarn: { x: 140, y: 275, vx: 0, vy: 0, active: false }, fishBowl: 2
-};
-​function addCozyParticle(x, y, text) { pet.particles.push({ x, y, vy: -1.2, life: 60, text }); }
-​cCanvas.addEventListener("pointerdown", e => {
-const rect = cCanvas.getBoundingClientRect();
-const mx = (e.clientX - rect.left) * (cCanvas.width / rect.width);
-const my = (e.clientY - rect.top) * (cCanvas.height / rect.height);
-if (Math.hypot(mx - pet.x, my - (pet.y - 25)) < 65) {
-pet.state = "happy"; pet.stateTimer = 70; pet.happy = Math.min(100, pet.happy + 6);
-sfxMeow(); addCozyParticle(pet.x, pet.y - 65, "Purrr ♡");
-$("#cozy-toast").textContent = "Purrrr... Tortoro loves head scratches! 🥰";
-} else if (my > 210) {
-pet.targetX = Math.max(80, Math.min(520, mx)); pet.state = "run"; pet.stateTimer = 90;
-}
-});
-​$("#act-feed").addEventListener("click", () => {
-pet.fishBowl = 3; pet.targetX = 465; pet.state = "run"; pet.stateTimer = 110;
-pet.hunger = Math.min(100, pet.hunger + 18); pet.happy = Math.min(100, pet.happy + 6);
-sfxHeart(); addCozyParticle(465, 245, "🐟 Yummy!");
-$("#cozy-toast").textContent = "Fresh fish treat served in Bugo! 🐟";
-});
-$("#act-toy").addEventListener("click", () => {
-pet.yarn = { x: 120 + Math.random() * 200, y: 120, vx: (Math.random() - 0.5) * 8, vy: -4, active: true };
-pet.energy = Math.max(0, pet.energy - 10); pet.happy = Math.min(100, pet.happy + 14);
-sfxJump(); $("#cozy-toast").textContent = "Tortoro is chasing the pink yarn ball! 🧶";
-});
-$("#act-sleep").addEventListener("click", () => {
-if (pet.state === "sleep") { pet.state = "idle"; pet.stateTimer = 0; sfxMeow(); }
-else { pet.targetX = 115; pet.state = "sleep"; pet.stateTimer = 9999; sfxHeart(); $("#cozy-toast").textContent = "Tortoro curled up in his Bugo bed 💤"; }
-});
-$("#act-time").addEventListener("click", () => {
-pet.isSunset = !pet.isSunset; sfxHeart();
-$("#cozy-toast").textContent = pet.isSunset ? "Golden sunset over Bugo 🌅" : "Bright morning in Cagayan de Oro ☀️";
-});
-​let cozyFrame = 0;
-function updateCozyRoom() {
-cozyFrame++;
-if (pet.yarn.active) {
-pet.yarn.x += pet.yarn.vx; pet.yarn.y += pet.yarn.vy; pet.yarn.vy += 0.35;
-if (pet.yarn.y > 278) { pet.yarn.y = 278; pet.yarn.vy *= -0.65; pet.yarn.vx *= 0.92; }
-pet.targetX = pet.yarn.x;
-if (Math.abs(pet.yarn.vx) < 0.2 && pet.yarn.y >= 277) pet.yarn.active = false;
-}
-​const dx = pet.targetX - pet.x;
-if (Math.abs(dx) > 4) {
-pet.facing = dx > 0 ? 1 : -1; pet.x += pet.facing * 2.4;
-if (pet.state !== "sleep") pet.state = "run";
-} else if (pet.state === "run") { pet.state = "idle"; }
-​cCtx.clearRect(0, 0, 600, 340);
-cCtx.fillStyle = pet.isSunset ? "#f5d5cb" : "#fdf1f5"; cCtx.fillRect(0, 0, 600, 245);
-cCtx.fillStyle = pet.isSunset ? "#c99679" : "#deb193"; cCtx.fillRect(0, 245, 600, 95);
-​// Window
-cCtx.fillStyle = pet.isSunset ? "#f28c6b" : "#bce3fa"; cCtx.fillRect(210, 35, 180, 125);
-cCtx.fillStyle = pet.isSunset ? "#ffe184" : "#fff9d2"; cCtx.beginPath(); cCtx.arc(335, 70, 22, 0, Math.PI * 2); cCtx.fill();
-cCtx.font = "34px serif"; cCtx.fillText("🌴", 225, 152);
-cCtx.strokeStyle = "#fff"; cCtx.lineWidth = 6; cCtx.strokeRect(210, 35, 180, 125);
-​// Bed & Bowl
-cCtx.fillStyle = "#e88cae"; cCtx.beginPath(); cCtx.ellipse(115, 278, 52, 18, 0, 0, Math.PI * 2); cCtx.fill();
-cCtx.fillStyle = "#d46a90"; cCtx.beginPath(); cCtx.roundRect(450, 265, 44, 18, 6); cCtx.fill();
-​drawTortoro(cCtx, pet.x, pet.y, 1.35, pet.state, cozyFrame, pet.facing);
-requestAnimationFrame(updateCozyRoom);
-}
-updateCozyRoom();
-​// --- GAME 2: ARCADE RUNNER ---
-const aCanvas = $("#arcade-canvas");
-const aCtx = aCanvas.getContext("2d");
-const overlay = $("#arcade-overlay");
-let bestScore = Number(localStorage.getItem("tortoro-best") || 0);
-$("#arc-best").textContent = bestScore;
-​let arc = {
-running: false, score: 0, speed: 4.6, frame: 0, lives: 3, invuln: 0,
-cat: { x: 85, y: 275, vy: 0, jumps: 0, ducking: false },
-obstacles: [], collectibles: [], bgOffset: 0
-};
-​function startArcade() {
-arc = {
-running: true, score: 0, speed: 4.6, frame: 0, lives: 3, invuln: 0,
-cat: { x: 85, y: 275, vy: 0, jumps: 0, ducking: false },
-obstacles: [], collectibles: [], bgOffset: 0
-};
-$("#arc-score").textContent = "0";
-overlay.classList.add("hidden");
-sfxJump();
-}
-​function arcJump() {
-if (!arc.running) return;
-if (arc.cat.jumps < 2) {
-arc.cat.vy = arc.cat.jumps === 0 ? -11.5 : -10; arc.cat.jumps++; arc.cat.ducking = false; sfxJump();
-}
-}
-function arcDuck(isD) { if (arc.running) arc.cat.ducking = isD; }
-​$("#arc-start-btn").addEventListener("click", startArcade);
-$("#pad-jump").addEventListener("pointerdown", e => { e.preventDefault(); arcJump(); });
-$("#pad-duck").addEventListener("pointerdown", e => { e.preventDefault(); arcDuck(true); });
-$("#pad-duck").addEventListener("pointerup", () => arcDuck(false));
-​function gameOver() {
-arc.running = false; sfxHit();
-if (arc.score > bestScore) { bestScore = arc.score; localStorage.setItem("tortoro-best", bestScore); $("#arc-best").textContent = bestScore; }
-overlay.innerHTML = <h4>Great Run, Tortoro! 🐾</h4><p>Score: <strong>${arc.score}</strong></p><button class="btn-romantic" id="arc-retry-btn">Play Again ↻</button>;
-overlay.classList.remove("hidden");
-$("#arc-retry-btn").addEventListener("click", startArcade);
-}
-​function updateArcade() {
-aCtx.clearRect(0, 0, 600, 340);
-aCtx.fillStyle = "#fce4ec"; aCtx.fillRect(0, 0, 600, 340);
-aCtx.fillStyle = "#d992ad"; aCtx.fillRect(0, 280, 600, 60);
-​if (arc.running) {
-arc.frame++; arc.bgOffset += arc.speed;
-arc.cat.y += arc.cat.vy; arc.cat.vy += 0.62;
-if (arc.cat.y >= 275) { arc.cat.y = 275; arc.cat.vy = 0; arc.cat.jumps = 0; }
-​if (arc.frame % 75 === 0) arc.obstacles.push({ x: 630, y: 262, type: "crab" });
-if (arc.frame % 55 === 0) arc.collectibles.push({ x: 630, y: 190, type: "heart" });
-​arc.collectibles = arc.collectibles.filter(item => {
-item.x -= arc.speed;
-aCtx.font = "24px serif"; aCtx.fillText("💖", item.x, item.y);
-if (Math.hypot(item.x - arc.cat.x, item.y - (arc.cat.y - 20)) < 34) {
-sfxHeart(); arc.score++; $("#arc-score").textContent = arc.score; return false;
-}
-return item.x > -40;
-});
-​arc.obstacles = arc.obstacles.filter(obs => {
-obs.x -= arc.speed;
-aCtx.font = "28px serif"; aCtx.fillText("🦀", obs.x, obs.y + 12);
-if (arc.invuln === 0 && Math.abs(obs.x - arc.cat.x) < 26 && Math.abs(obs.y - (arc.cat.y - 22)) < 24) {
-arc.lives--; arc.invuln = 75; sfxHit();
-if (arc.lives <= 0) gameOver();
-}
-return obs.x > -40;
-});
-}
-​if (arc.invuln % 8 < 5) drawTortoro(aCtx, arc.cat.x, arc.cat.y, 1.05, arc.cat.ducking ? "duck" : (arc.running ? "run" : "idle"), arc.frame, 1);
-​aCtx.font = "18px serif";
-for (let i = 0; i < 3; i++) aCtx.fillText(i < arc.lives ? "❤️" : "🤍", 16 + i * 24, 30);
-​requestAnimationFrame(updateArcade);
-}
-updateArcade();
-})();
-</script>
-<script src="js/letters.js"></script>
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <!-- SECRET GATE -->
+  <section id="gate" class="gate">
+    <div class="gate-card glass-panel">
+      <div class="wax-seal">♡</div>
+      <p class="eyebrow">PRIVATE UNIVERSE · EST. 18.12.2025</p>
+      <h1>Chrizza's <em>World</em></h1>
+      <p class="gate-copy">Somewhere between a white T-shirt on OmeTV, a random Instagram Reel, and a love that crosses oceans.</p>
+      <div class="gate-form">
+        <input id="secret-code" type="password" placeholder="Enter our secret word..." autocomplete="off">
+        <button id="enter-btn" class="btn-romantic">Unlock Our World <span>✦</span></button>
+      </div>
+      <p id="gate-error" class="gate-error" aria-live="polite"></p>
+      <span class="gate-hint">Hint: your favourite Italian nickname</span>
+    </div>
+  </section>
+
+  <!-- MAIN SITE -->
+  <div id="site" class="site hidden">
+    <header class="topbar">
+      <a class="brand" href="#home">Chrizza <span>♡</span> Stefanino</a>
+      <button id="menu-toggle" class="menu-toggle" aria-label="Menu">☰</button>
+      <nav id="main-nav">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#our-story" class="nav-link">Our Story</a>
+        <a href="#memories" class="nav-link">Letters & Music</a>
+        <a href="#cinema" class="nav-link">Cinema</a>
+        <a href="#distance" class="nav-link">Distance</a>
+        <a href="#play" class="nav-link">Tortoro</a>
+      </nav>
+      <button id="sound-toggle" class="pill-btn" title="Toggle Game Sound">🔊 <span>SFX On</span></button>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section id="home" class="hero section-shell">
+        <div class="hero-copy reveal">
+          <div class="badge-romantic">✦ ARCORE (ITALY) ⇄ BUGO, CDO (PH)</div>
+          <h1>Welcome to<br><em>your universe,</em><br>my Patatina.</h1>
+          <p class="hero-sub">Every letter I wrote, our favorite movies, our music, and a special corner dedicated to Tortoro in Bugo — all wrapped in one place made exclusively for you.</p>
+          <div class="hero-actions">
+            <a class="btn-romantic" href="#play">Play with Tortoro <span>🐾</span></a>
+            <a class="btn-outline" href="#letters">Open My Letters <span>✉</span></a>
+          </div>
+          <div class="hero-signature">Forever yours, <span>Stefanino ♥</span></div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="polaroid-stack">
+            <div class="polaroid back-card">
+              <div class="polaroid-inner gradient-sunset">
+                <span class="big-emoji">🌙✨</span>
+                <p>Moon & Venus Kiss</p>
+              </div>
+            </div>
+            <div class="polaroid main-card">
+              <div class="polaroid-photo">
+                <img src="assets/images/tortoro.jpg" alt="Tortoro" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="photo-fallback" style="display:none">
+                  <span>✿</span>
+                  <p>Your smile belongs here</p>
+                </div>
+              </div>
+              <div class="polaroid-caption">King Tortoro & his Queen Chrizza ♡</div>
+            </div>
+            <div class="sticker sticker-1">11 months 💓</div>
+            <div class="sticker sticker-2">mi nena ✿</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LIVE LOVE COUNTER & ECG HEARTBEAT -->
+      <section class="counter-banner section-shell reveal">
+        <div class="counter-grid glass-panel">
+          <div class="counter-header">
+            <span class="eyebrow">LOVING YOU SINCE DECEMBER 18, 2025</span>
+          </div>
+          <div class="counter-boxes">
+            <div class="c-box"><strong id="c-days">0</strong><span>Days</span></div>
+            <div class="c-box"><strong id="c-hours">0</strong><span>Hours</span></div>
+            <div class="c-box"><strong id="c-mins">0</strong><span>Minutes</span></div>
+            <div class="c-box"><strong id="c-secs">0</strong><span>Seconds</span></div>
+          </div>
+
+          <!-- ECG HEARTBEAT WIDGET -->
+          <div class="ecg-container" id="ecg-trigger" title="Click to accelerate heartbeat!">
+            <div class="ecg-info">
+              <span class="ecg-heart-icon">💓</span>
+              <p id="ecg-text">Click the heart to feel my pulse...</p>
+            </div>
+            <canvas id="ecg-canvas" width="500" height="75"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- OUR STORY -->
+      <section id="our-story" class="content-section section-shell">
+        <div class="section-heading reveal">
+          <span class="eyebrow">CHAPTERS OF US</span>
+          <h2>How a random night became <em>my favourite story</em></h2>
+          <p>From thousands of kilometers away, you turned my everyday life into something meaningful.</p>
+        </div>
+
+        <div class="story-hero-card glass-panel reveal">
+          <div class="chapter-tag">CHAPTER 01 · OMETV</div>
+          <h3>It all started with a white T-shirt.</h3>
+          <div class="story-columns">
+            <p>You were in the dark on OmeTV. I could barely see you, so I illuminated my face with my white T-shirt — and for about two seconds, I saw yours. Then we started talking about movies and hobbies.</p>
+            <p>You asked if I liked reading books. I said I preferred movies and recommended <em>The Hangover</em>. Then I told you I went to the gym and flexed my bicep. Very smooth, Stefanino. 😂</p>
+            <p>You gave me your Instagram. I didn't text for two days… and <strong>you sent me the first Reel.</strong> When you told me you had actually watched the movie I recommended, I felt truly listened to.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MUSIC & LETTERS -->
+      <section id="memories" class="content-section section-shell alt-bg">
+        <div class="section-heading reveal">
+          <span class="eyebrow">SOUNDTRACK & WORDS</span>
+          <h2>Our <em>Music</em> & Letters</h2>
+          <p>Chrizza's favorite songs (LANY, The Weeknd, music intros) and envelopes written straight from my heart.</p>
+        </div>
+
+        <!-- LANY & SPECIAL PLAYLIST WIDGET -->
+        <div class="playlist-cabinet glass-panel reveal">
+          <div class="playlist-header">
+            <div>
+              <span class="eyebrow">CHRIZZA'S SPECIAL PLAYLIST 🎸</span>
+              <h3>Our Soundtrack</h3>
+            </div>
+            <span class="badge-pill">LANY · The Weeknd · Vibes</span>
+          </div>
+          <div class="song-list">
+            <div class="song-item">
+              <span class="song-icon">🎵</span>
+              <div class="song-meta">
+                <strong>LANY Hits & Playlist</strong>
+                <p>Her absolute favourite band playing in the background</p>
+              </div>
+            </div>
+            <div class="song-item">
+              <span class="song-icon">🌙</span>
+              <div class="song-meta">
+                <strong>One of the Girls — The Weeknd, Jennie, Lily-Rose Depp</strong>
+                <p>Our late-night video call vibe</p>
+              </div>
+            </div>
+            <div class="song-item">
+              <span class="song-icon">💃</span>
+              <div class="song-meta">
+                <strong>Gata Only — FloyyMenor, Cris Mj</strong>
+                <p>Catchy rhythm & good memories</p>
+              </div>
+            </div>
+            <div class="song-item highlight-song">
+              <span class="song-icon">✨</span>
+              <div class="song-meta">
+                <strong>Si No Es Contigo — Louis Tomlinson</strong>
+                <p class="song-quote">“Meeting you felt like the first time hearing this intro.”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="letters" class="letters-showcase reveal" style="margin-top: 40px;">
+          <div id="letter-list" class="envelope-grid"></div>
+        </div>
+      </section>
+
+      <!-- CINEMA SECTION -->
+      <section id="cinema" class="content-section section-shell">
+        <div class="section-heading reveal">
+          <span class="eyebrow">OUR MOVIE NIGHTS</span>
+          <h2>Long-Distance <em>Cinema</em></h2>
+          <p>All the movies we watched together across the screen, making ordinary nights feel like dates.</p>
+        </div>
+
+        <div class="movie-grid reveal">
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Comedy</span>
+            <h4>Una Notte da Leoni</h4>
+            <p>The movie recommendation that started it all!</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Classic</span>
+            <h4>American Pie</h4>
+            <p>A lot of laughs together on video call.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Rom-Com</span>
+            <h4>Amici di Letto</h4>
+            <p>Fun movie nights shared from afar.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Comedy</span>
+            <h4>Dead End Job</h4>
+            <p>Another hilarious watch on our list.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Party</span>
+            <h4>Project X</h4>
+            <p>Pure chaotic energy and great laughs.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Comedy</span>
+            <h4>Superbad</h4>
+            <p>One of our absolute favorite comedy classics.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Starring</span>
+            <h4>Zendaya Films</h4>
+            <p>Enjoying movies with her amazing talent.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Thriller</span>
+            <h4>Thai Zombie Movies</h4>
+            <p>Spooky, intense horror nights together!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE DISTANCE MAP SECTION -->
+      <section id="distance" class="content-section section-shell alt-bg">
+        <div class="distance-box glass-panel reveal">
+          <div class="section-heading" style="margin-bottom:24px;">
+            <span class="eyebrow">KILOMETERS APART, CLOSE AT HEART</span>
+            <h2>Arcore ⇄ <em>Bugo, Cagayan de Oro</em></h2>
+            <p>Thousands of kilometers separate Italy from the Philippines, but video calls make the distance vanish.</p>
+          </div>
+          <div class="map-visual">
+            <div class="map-pin">
+              <span>🇮🇹 Arcore, Italy</span>
+              <small>Stefanino's home</small>
+            </div>
+            <div class="map-line-pulse">
+              <div class="pulse-dot"></div>
+            </div>
+            <div class="map-pin">
+              <span>🇵🇭 Bugo, CDO</span>
+              <small>Chrizza & Tortoro's home</small>
+            </div>
+          </div>
+          <p class="map-note">“Every time we fall asleep on video call, the distance doesn't matter anymore.”</p>
+        </div>
+      </section>
+
+      <!-- TORTORO'S GAMES -->
+      <section id="play" class="content-section section-shell">
+        <div class="section-heading reveal">
+          <span class="eyebrow">INTERACTIVE ARCADE</span>
+          <h2>Tortoro's <em>Playground</em></h2>
+          <p>Two full interactive games starring your handsome grey tabby in Bugo!</p>
+        </div>
+
+        <div class="games-master-grid">
+          <!-- GAME 1: COZY ROOM -->
+          <div class="game-cabinet glass-panel reveal">
+            <div class="cabinet-header">
+              <div>
+                <span class="eyebrow">GAME 01 · VIRTUAL PET</span>
+                <h3>Tortoro's Cozy House in Bugo</h3>
+              </div>
+              <span class="level-badge" id="cozy-level">Affection Lv. 1</span>
+            </div>
+            <p class="game-desc">Pet Tortoro directly on the screen, toss his yarn ball, feed him fish treats, or switch day/night!</p>
+
+            <div class="canvas-wrapper">
+              <canvas id="cozy-canvas" width="600" height="340"></canvas>
+              <div class="canvas-toast" id="cozy-toast">Tap Tortoro to pet him! 🐾</div>
+            </div>
+
+            <div class="pet-bars">
+              <div class="p-bar">
+                <div class="p-bar-top"><span>🐟 Hunger</span><span id="stat-hunger">85%</span></div>
+                <div class="p-track"><div class="p-fill fill-peach" id="bar-hunger" style="width:85%"></div></div>
+              </div>
+              <div class="p-bar">
+                <div class="p-bar-top"><span>💖 Happiness</span><span id="stat-happy">90%</span></div>
+                <div class="p-track"><div class="p-fill fill-pink" id="bar-happy" style="width:90%"></div></div>
+              </div>
+              <div class="p-bar">
+                <div class="p-bar-top"><span>⚡ Energy</span><span id="stat-energy">80%</span></div>
+                <div class="p-track"><div class="p-fill fill-lav" id="bar-energy" style="width:80%"></div></div>
+              </div>
+            </div>
+
+            <div class="cabinet-controls">
+              <button class="game-btn" id="act-feed">🐟 Feed Fish</button>
+              <button class="game-btn" id="act-toy">🧶 Toss Yarn</button>
+              <button class="game-btn" id="act-sleep">💤 Nap / Wake</button>
+              <button class="game-btn" id="act-time">🌅 Day / Sunset</button>
+            </div>
+          </div>
+
+          <!-- GAME 2: RUNNER -->
+          <div class="game-cabinet glass-panel reveal">
+            <div class="cabinet-header">
+              <div>
+                <span class="eyebrow">GAME 02 · ARCADE RUNNER</span>
+                <h3>Tortoro's Bugo Adventure</h3>
+              </div>
+              <div class="score-pills">
+                <span class="level-badge">Score: <strong id="arc-score">0</strong></span>
+                <span class="level-badge best">Best: <strong id="arc-best">0</strong></span>
+              </div>
+            </div>
+            <p class="game-desc">Double-jump over crabs & coconuts, duck under birds, and grab golden fish & love magnets!</p>
+
+            <div class="canvas-wrapper">
+              <canvas id="arcade-canvas" width="600" height="340"></canvas>
+              <div id="arcade-overlay" class="arcade-overlay">
+                <h4>Ready to Explore Bugo?</h4>
+                <p>Jump (↑ / Space / Tap) · Double Jump · Duck (↓)</p>
+                <button class="btn-romantic" id="arc-start-btn">Start Adventure 🐾</button>
+              </div>
+            </div>
+
+            <div class="cabinet-controls arcade-pad">
+              <button class="game-btn big-pad" id="pad-jump">⬆ Jump (x2)</button>
+              <button class="game-btn big-pad" id="pad-duck">⬇ Duck / Slide</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLOSING -->
+      <section class="closing section-shell reveal">
+        <div class="wax-seal large">♡</div>
+        <span class="eyebrow">AND THIS IS ONLY THE BEGINNING</span>
+        <h2>More chapters,<br><em>more memories,</em><br>more us.</h2>
+        <p>From a random night on OmeTV to eleven months of choosing each other. I can't wait to see what we write next.</p>
+        <div class="signature">Always yours,<br><span>Stefanino ♡</span></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Crafted with all my heart for Chrizza ♡</span>
+      <span>Chrizza's World · Italy ⇄ Philippines</span>
+    </footer>
+  </div>
+
+  <!-- LETTER MODAL -->
+  <div id="letter-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <article class="letter-sheet">
+      <button class="modal-close" id="close-letter" aria-label="Close">×</button>
+      <div class="sheet-top">
+        <span class="eyebrow">A LETTER FROM STEFANINO</span>
+        <h2 id="modal-title"></h2>
+      </div>
+      <div id="modal-letter-body" class="letter-body"></div>
+      <div class="letter-footer">
+        <p>Always yours,<br><span>Stefanino ♡</span></p>
+      </div>
+    </article>
+  </div>
+
+  <script src="js/letters.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
