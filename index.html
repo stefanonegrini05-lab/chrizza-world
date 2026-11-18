@@ -40,20 +40,21 @@
       <nav id="main-nav">
         <a href="#home" class="nav-link active">Home</a>
         <a href="#our-story" class="nav-link">Our Story</a>
-        <a href="#memories" class="nav-link">Letters & Memories</a>
-        <a href="#for-chrizza" class="nav-link">For You</a>
-        <a href="#play" class="nav-link">Tortoro's Games</a>
+        <a href="#memories" class="nav-link">Letters & Music</a>
+        <a href="#cinema" class="nav-link">Cinema</a>
+        <a href="#distance" class="nav-link">Distance</a>
+        <a href="#play" class="nav-link">Tortoro</a>
       </nav>
-      <button id="sound-toggle" class="pill-btn" title="Toggle Game Sound Effects">🔊 <span>SFX On</span></button>
+      <button id="sound-toggle" class="pill-btn" title="Toggle Game Sound">🔊 <span>SFX On</span></button>
     </header>
 
     <main>
       <!-- HERO -->
       <section id="home" class="hero section-shell">
         <div class="hero-copy reveal">
-          <div class="badge-romantic">✦ ITALY ✈ CAGAYAN DE ORO</div>
+          <div class="badge-romantic">✦ ARCORE (ITALY) ⇄ BUGO, CDO (PH)</div>
           <h1>Welcome to<br><em>your universe,</em><br>my Patatina.</h1>
-          <p class="hero-sub">Every letter I wrote, every milestone we reached, and a special corner dedicated to Tortoro in Bugo — all wrapped in one place made exclusively for you.</p>
+          <p class="hero-sub">Every letter I wrote, our favorite movies, our music, and a special corner dedicated to Tortoro in Bugo — all wrapped in one place made exclusively for you.</p>
           <div class="hero-actions">
             <a class="btn-romantic" href="#play">Play with Tortoro <span>🐾</span></a>
             <a class="btn-outline" href="#letters">Open My Letters <span>✉</span></a>
@@ -85,7 +86,7 @@
         </div>
       </section>
 
-      <!-- LIVE LOVE COUNTER -->
+      <!-- LIVE LOVE COUNTER & ECG HEARTBEAT -->
       <section class="counter-banner section-shell reveal">
         <div class="counter-grid glass-panel">
           <div class="counter-header">
@@ -96,6 +97,15 @@
             <div class="c-box"><strong id="c-hours">0</strong><span>Hours</span></div>
             <div class="c-box"><strong id="c-mins">0</strong><span>Minutes</span></div>
             <div class="c-box"><strong id="c-secs">0</strong><span>Seconds</span></div>
+          </div>
+
+          <!-- ECG HEARTBEAT WIDGET -->
+          <div class="ecg-container" id="ecg-trigger" title="Click to accelerate heartbeat!">
+            <div class="ecg-info">
+              <span class="ecg-heart-icon">💓</span>
+              <p id="ecg-text">Click the heart to feel my pulse...</p>
+            </div>
+            <canvas id="ecg-canvas" width="500" height="75"></canvas>
           </div>
         </div>
       </section>
@@ -117,91 +127,158 @@
             <p>You gave me your Instagram. I didn't text for two days… and <strong>you sent me the first Reel.</strong> When you told me you had actually watched the movie I recommended, I felt truly listened to.</p>
           </div>
         </div>
-
-        <div class="story-cards-row reveal">
-          <article class="glass-card">
-            <div class="icon-circle">📩</div>
-            <span class="eyebrow">THE FIRST MOVE</span>
-            <h4>You texted first</h4>
-            <p>A Reel, two days later. A tiny notification that opened a whole new universe for both of us.</p>
-          </article>
-          <article class="glass-card">
-            <div class="icon-circle">💍</div>
-            <span class="eyebrow">18 DECEMBER 2025</span>
-            <h4>“Will you be my girlfriend?”</h4>
-            <p>After two weeks of talking nonstop, I asked you to be mine — right after a Reel, obviously. AHAHAHA.</p>
-          </article>
-          <article class="glass-card">
-            <div class="icon-circle">🌷</div>
-            <span class="eyebrow">STRONGER TOGETHER</span>
-            <h4>Choosing each other</h4>
-            <p>Even through hard chapters and distance, we learned to listen, grow, and choose each other every single day.</p>
-          </article>
-        </div>
       </section>
 
-      <!-- MEMORIES & LETTERS -->
+      <!-- MUSIC & LETTERS -->
       <section id="memories" class="content-section section-shell alt-bg">
         <div class="section-heading reveal">
-          <span class="eyebrow">KEEPSAKES & WORDS</span>
-          <h2>Our <em>Letters</em> & Milestones</h2>
-          <p>Tap any wax-sealed envelope to read my exact words to you, month after month.</p>
+          <span class="eyebrow">SOUNDTRACK & WORDS</span>
+          <h2>Our <em>Music</em> & Letters</h2>
+          <p>Chrizza's favorite songs (LANY, The Weeknd, music intros) and envelopes written straight from my heart.</p>
         </div>
 
-        <div id="letters" class="letters-showcase reveal">
-          <div id="letter-list" class="envelope-grid"></div>
-        </div>
-
-        <div class="subsection reveal">
-          <div class="sub-header">
-            <h3>Month by Month <em>Highlights</em></h3>
-            <span class="badge-pill">11 Months & Counting</span>
+        <!-- LANY & SPECIAL PLAYLIST WIDGET -->
+        <div class="playlist-cabinet glass-panel reveal">
+          <div class="playlist-header">
+            <div>
+              <span class="eyebrow">CHRIZZA'S SPECIAL PLAYLIST 🎸</span>
+              <h3>Our Soundtrack</h3>
+            </div>
+            <span class="badge-pill">LANY · The Weeknd · Vibes</span>
           </div>
-          <div id="monthsary-list" class="milestone-grid"></div>
-        </div>
-      </section>
-
-      <!-- FOR CHRIZZA -->
-      <section id="for-chrizza" class="content-section section-shell">
-        <div class="bucket-layout glass-panel reveal">
-          <div class="bucket-info">
-            <span class="eyebrow">OUR FUTURE TOGETHER</span>
-            <h2>The <em>Bucket List</em></h2>
-            <p>All the simple and extraordinary things waiting for us when the distance finally disappears.</p>
-            <div class="promise-box">
-              <span>♡</span> "Soon I won't have to explain everything with words through a screen. I'll be right there beside you."
+          <div class="song-list">
+            <div class="song-item">
+              <span class="song-icon">🎵</span>
+              <div class="song-meta">
+                <strong>LANY Hits & Playlist</strong>
+                <p>Her absolute favourite band playing in the background</p>
+              </div>
+            </div>
+            <div class="song-item">
+              <span class="song-icon">🌙</span>
+              <div class="song-meta">
+                <strong>One of the Girls — The Weeknd, Jennie, Lily-Rose Depp</strong>
+                <p>Our late-night video call vibe</p>
+              </div>
+            </div>
+            <div class="song-item">
+              <span class="song-icon">💃</span>
+              <div class="song-meta">
+                <strong>Gata Only — FloyyMenor, Cris Mj</strong>
+                <p>Catchy rhythm & good memories</p>
+              </div>
+            </div>
+            <div class="song-item highlight-song">
+              <span class="song-icon">✨</span>
+              <div class="song-meta">
+                <strong>Si No Es Contigo — Louis Tomlinson</strong>
+                <p class="song-quote">“Meeting you felt like the first time hearing this intro.”</p>
+              </div>
             </div>
           </div>
-          <ul class="checklist" id="bucket-list">
-            <li data-idx="0"><span class="chk">♡</span> Finally meet in person and hold you tight</li>
-            <li data-idx="1"><span class="chk">♡</span> Watch a movie side by side (no screen between us)</li>
-            <li data-idx="2"><span class="chk">♡</span> Meet King Tortoro in Bugo</li>
-            <li data-idx="3"><span class="chk">♡</span> Take our first real photo together</li>
-            <li data-idx="4"><span class="chk">♡</span> Eat together & let me steal your food</li>
-            <li data-idx="5"><span class="chk">♡</span> Look at the same Moon side by side</li>
-          </ul>
+        </div>
+
+        <div id="letters" class="letters-showcase reveal" style="margin-top: 40px;">
+          <div id="letter-list" class="envelope-grid"></div>
         </div>
       </section>
 
-      <!-- TORTORO'S GAMES (SOPHISTICATED CANVAS GAMES) -->
-      <section id="play" class="content-section section-shell alt-bg">
+      <!-- CINEMA SECTION -->
+      <section id="cinema" class="content-section section-shell">
         <div class="section-heading reveal">
-          <span class="eyebrow">INTERACTIVE ARCADE · CAGAYAN DE ORO</span>
+          <span class="eyebrow">OUR MOVIE NIGHTS</span>
+          <h2>Long-Distance <em>Cinema</em></h2>
+          <p>All the movies we watched together across the screen, making ordinary nights feel like dates.</p>
+        </div>
+
+        <div class="movie-grid reveal">
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Comedy</span>
+            <h4>Una Notte da Leoni</h4>
+            <p>The movie recommendation that started it all!</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Classic</span>
+            <h4>American Pie</h4>
+            <p>A lot of laughs together on video call.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Rom-Com</span>
+            <h4>Amici di Letto</h4>
+            <p>Fun movie nights shared from afar.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Comedy</span>
+            <h4>Dead End Job</h4>
+            <p>Another hilarious watch on our list.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Party</span>
+            <h4>Project X</h4>
+            <p>Pure chaotic energy and great laughs.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Comedy</span>
+            <h4>Superbad</h4>
+            <p>One of our absolute favorite comedy classics.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Starring</span>
+            <h4>Zendaya Films</h4>
+            <p>Enjoying movies with her amazing talent.</p>
+          </div>
+          <div class="movie-card glass-panel">
+            <span class="movie-badge">Thriller</span>
+            <h4>Thai Zombie Movies</h4>
+            <p>Spooky, intense horror nights together!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE DISTANCE MAP SECTION -->
+      <section id="distance" class="content-section section-shell alt-bg">
+        <div class="distance-box glass-panel reveal">
+          <div class="section-heading" style="margin-bottom:24px;">
+            <span class="eyebrow">KILOMETERS APART, CLOSE AT HEART</span>
+            <h2>Arcore ⇄ <em>Bugo, Cagayan de Oro</em></h2>
+            <p>Thousands of kilometers separate Italy from the Philippines, but video calls make the distance vanish.</p>
+          </div>
+          <div class="map-visual">
+            <div class="map-pin">
+              <span>🇮🇹 Arcore, Italy</span>
+              <small>Stefanino's home</small>
+            </div>
+            <div class="map-line-pulse">
+              <div class="pulse-dot"></div>
+            </div>
+            <div class="map-pin">
+              <span>🇵🇭 Bugo, CDO</span>
+              <small>Chrizza & Tortoro's home</small>
+            </div>
+          </div>
+          <p class="map-note">“Every time we fall asleep on video call, the distance doesn't matter anymore.”</p>
+        </div>
+      </section>
+
+      <!-- TORTORO'S GAMES -->
+      <section id="play" class="content-section section-shell">
+        <div class="section-heading reveal">
+          <span class="eyebrow">INTERACTIVE ARCADE</span>
           <h2>Tortoro's <em>Playground</em></h2>
           <p>Two full interactive games starring your handsome grey tabby in Bugo!</p>
         </div>
 
         <div class="games-master-grid">
-          <!-- GAME 1: COZY ROOM SIMULATOR -->
+          <!-- GAME 1: COZY ROOM -->
           <div class="game-cabinet glass-panel reveal">
             <div class="cabinet-header">
               <div>
-                <span class="eyebrow">GAME 01 · VIRTUAL PET SIMULATOR</span>
+                <span class="eyebrow">GAME 01 · VIRTUAL PET</span>
                 <h3>Tortoro's Cozy House in Bugo</h3>
               </div>
               <span class="level-badge" id="cozy-level">Affection Lv. 1</span>
             </div>
-            <p class="game-desc">Pet Tortoro directly on the screen, toss his yarn ball, feed him fish treats, or switch day/night in Bugo!</p>
+            <p class="game-desc">Pet Tortoro directly on the screen, toss his yarn ball, feed him fish treats, or switch day/night!</p>
 
             <div class="canvas-wrapper">
               <canvas id="cozy-canvas" width="600" height="340"></canvas>
@@ -231,11 +308,11 @@
             </div>
           </div>
 
-          <!-- GAME 2: ENDLESS RUNNER ARCADE -->
+          <!-- GAME 2: RUNNER -->
           <div class="game-cabinet glass-panel reveal">
             <div class="cabinet-header">
               <div>
-                <span class="eyebrow">GAME 02 · ARCADE PLATFORM RUNNER</span>
+                <span class="eyebrow">GAME 02 · ARCADE RUNNER</span>
                 <h3>Tortoro's Bugo Adventure</h3>
               </div>
               <div class="score-pills">
@@ -243,7 +320,7 @@
                 <span class="level-badge best">Best: <strong id="arc-best">0</strong></span>
               </div>
             </div>
-            <p class="game-desc">Double-jump over crabs & coconuts, duck under tropical birds, and grab golden fish & love magnets!</p>
+            <p class="game-desc">Double-jump over crabs & coconuts, duck under birds, and grab golden fish & love magnets!</p>
 
             <div class="canvas-wrapper">
               <canvas id="arcade-canvas" width="600" height="340"></canvas>
@@ -259,21 +336,6 @@
               <button class="game-btn big-pad" id="pad-duck">⬇ Duck / Slide</button>
             </div>
           </div>
-        </div>
-
-        <!-- LOVE QUIZ -->
-        <div class="quiz-cabinet glass-panel reveal">
-          <div class="cabinet-header">
-            <div>
-              <span class="eyebrow">BONUS MINI-GAME · TRIVIA</span>
-              <h3>How Well Do You Know Our Story?</h3>
-            </div>
-            <span class="level-badge" id="quiz-progress">1 / 5</span>
-          </div>
-          <h4 id="quiz-question" class="quiz-q"></h4>
-          <div id="quiz-options" class="quiz-grid"></div>
-          <p id="quiz-feedback" class="quiz-feedback"></p>
-          <button id="quiz-next" class="btn-romantic hidden">Next Question →</button>
         </div>
       </section>
 
