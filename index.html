@@ -3,264 +3,312 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8edf1">
-  <meta name="description" content="A little universe made with love, just for Chrizza.">
+  <meta name="theme-color" content="#f5dce4">
   <title>Chrizza's World ♡</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-  <div class="floating-hearts-bg" id="floating-hearts-bg"></div>
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
 
+  <!-- SECRET GATE -->
   <section id="gate" class="gate">
-    <div class="gate-card">
-      <div class="tiny-flower">✿</div>
-      <p class="eyebrow">A LITTLE UNIVERSE MADE WITH LOVE</p>
+    <div class="gate-card glass-panel">
+      <div class="wax-seal">♡</div>
+      <p class="eyebrow">PRIVATE UNIVERSE · EST. 18.12.2025</p>
       <h1>Chrizza's <em>World</em></h1>
-      <p class="gate-copy">Somewhere between a white T-shirt, a random Reel<br>and a love story that keeps growing.</p>
-      <label class="sr-only" for="secret-code">Secret code</label>
-      <input id="secret-code" type="password" placeholder="A little secret..." autocomplete="off">
-      <button id="enter-btn" class="button button-primary">Enter my world <span>♡</span></button>
+      <p class="gate-copy">Somewhere between a white T-shirt on OmeTV, a random Instagram Reel, and a love that crosses oceans.</p>
+      <div class="gate-form">
+        <input id="secret-code" type="password" placeholder="Enter our secret word..." autocomplete="off">
+        <button id="enter-btn" class="btn-romantic">Unlock Our World <span>✦</span></button>
+      </div>
       <p id="gate-error" class="gate-error" aria-live="polite"></p>
-      <small>Hint: your favourite nickname.</small>
+      <span class="gate-hint">Hint: your favourite Italian nickname</span>
     </div>
   </section>
 
+  <!-- MAIN SITE -->
   <div id="site" class="site hidden">
     <header class="topbar">
-      <a class="brand" href="#home" aria-label="Chrizza's World home">C<span>♡</span>W</a>
-      <button id="menu-toggle" class="menu-toggle" aria-label="Open navigation">☰</button>
+      <a class="brand" href="#home">Chrizza <span>♡</span> Stefanino</a>
+      <button id="menu-toggle" class="menu-toggle" aria-label="Menu">☰</button>
       <nav id="main-nav">
         <a href="#home" class="nav-link active">Home</a>
-        <a href="#our-story" class="nav-link">Our story</a>
-        <a href="#memories" class="nav-link">Memories</a>
-        <a href="#for-chrizza" class="nav-link">For Chrizza</a>
-        <a href="#play" class="nav-link">Play with Tortoro</a>
+        <a href="#our-story" class="nav-link">Our Story</a>
+        <a href="#memories" class="nav-link">Letters & Memories</a>
+        <a href="#for-chrizza" class="nav-link">For You</a>
+        <a href="#play" class="nav-link">Tortoro's Games</a>
       </nav>
-      <button id="music-toggle" class="music-toggle" title="Toggle ambience">♫ <span>Music</span></button>
+      <button id="sound-toggle" class="pill-btn" title="Toggle Game Sound Effects">🔊 <span>SFX On</span></button>
     </header>
 
     <main>
+      <!-- HERO -->
       <section id="home" class="hero section-shell">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="sparkle">✦</span> MADE JUST FOR YOU</p>
-          <h1>Welcome to<br><em>your world,</em><br>Chrizza.</h1>
-          <p class="hero-sub">A little place for your memories, your favourite things, our story, and all the chapters still waiting for us.</p>
+        <div class="hero-copy reveal">
+          <div class="badge-romantic">✦ ITALY ✈ CAGAYAN DE ORO</div>
+          <h1>Welcome to<br><em>your universe,</em><br>my Patatina.</h1>
+          <p class="hero-sub">Every letter I wrote, every milestone we reached, and a special corner dedicated to Tortoro in Bugo — all wrapped in one place made exclusively for you.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#our-story">Explore our world <span>↗</span></a>
-            <a class="text-link" href="#letters">Read my letters</a>
+            <a class="btn-romantic" href="#play">Play with Tortoro <span>🐾</span></a>
+            <a class="btn-outline" href="#letters">Open My Letters <span>✉</span></a>
           </div>
-          <div class="hero-note"><span class="mini-heart">♥</span> Always yours, Stefanino</div>
+          <div class="hero-signature">Forever yours, <span>Stefanino ♥</span></div>
         </div>
-        <div class="hero-art">
-          <div class="photo-frame">
-            <div class="photo-placeholder">
-              <span class="photo-flower">✿</span>
-              <span>Your favourite smile<br>belongs here</span>
-              <small>Add Chrizza's photo</small>
+
+        <div class="hero-visual reveal">
+          <div class="polaroid-stack">
+            <div class="polaroid back-card">
+              <div class="polaroid-inner gradient-sunset">
+                <span class="big-emoji">🌙✨</span>
+                <p>Moon & Venus Kiss</p>
+              </div>
             </div>
-            <div class="frame-caption">the girl who changed my world</div>
+            <div class="polaroid main-card">
+              <div class="polaroid-photo">
+                <img src="assets/images/tortoro.jpg" alt="Tortoro" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="photo-fallback" style="display:none">
+                  <span>✿</span>
+                  <p>Your smile belongs here</p>
+                </div>
+              </div>
+              <div class="polaroid-caption">King Tortoro & his Queen Chrizza ♡</div>
+            </div>
+            <div class="sticker sticker-1">11 months 💓</div>
+            <div class="sticker sticker-2">mi nena ✿</div>
           </div>
-          <div class="floating-note note-one">my patatina ♡</div>
-          <div class="floating-note note-two">11 months & counting ✧</div>
-          <div class="orbit-heart">♡</div>
         </div>
       </section>
 
-      <section class="quick-stats section-shell">
-        <div><strong id="days-together">—</strong><span>days of us</span></div>
-        <div><strong>11</strong><span>months together</span></div>
-        <div><strong>∞</strong><span>chapters to come</span></div>
+      <!-- LIVE LOVE COUNTER -->
+      <section class="counter-banner section-shell reveal">
+        <div class="counter-grid glass-panel">
+          <div class="counter-header">
+            <span class="eyebrow">LOVING YOU SINCE DECEMBER 18, 2025</span>
+          </div>
+          <div class="counter-boxes">
+            <div class="c-box"><strong id="c-days">0</strong><span>Days</span></div>
+            <div class="c-box"><strong id="c-hours">0</strong><span>Hours</span></div>
+            <div class="c-box"><strong id="c-mins">0</strong><span>Minutes</span></div>
+            <div class="c-box"><strong id="c-secs">0</strong><span>Seconds</span></div>
+          </div>
+        </div>
       </section>
 
+      <!-- OUR STORY -->
       <section id="our-story" class="content-section section-shell">
-        <div class="section-heading">
-          <p class="eyebrow">CHAPTERS OF US</p>
-          <h2>Our <em>story</em></h2>
-          <p>It started in the most unexpected place. And somehow, it became my favourite story.</p>
+        <div class="section-heading reveal">
+          <span class="eyebrow">CHAPTERS OF US</span>
+          <h2>How a random night became <em>my favourite story</em></h2>
+          <p>From thousands of kilometers away, you turned my everyday life into something meaningful.</p>
         </div>
-        <div class="story-feature">
-          <div class="story-number">01</div>
-          <div>
-            <p class="eyebrow">THE BEGINNING</p>
-            <h3>It all started with a white T-shirt.</h3>
+
+        <div class="story-hero-card glass-panel reveal">
+          <div class="chapter-tag">CHAPTER 01 · OMETV</div>
+          <h3>It all started with a white T-shirt.</h3>
+          <div class="story-columns">
             <p>You were in the dark on OmeTV. I could barely see you, so I illuminated my face with my white T-shirt — and for about two seconds, I saw yours. Then we started talking about movies and hobbies.</p>
-            <p>You asked if I liked reading books. I said I preferred movies and TV shows, and recommended <em>The Hangover</em>. Then I told you I went to the gym and, of course, flexed my bicep. Very smooth, Stefanino. 😂</p>
-            <p>You gave me your Instagram. I didn't text for two days… and <strong>you sent me the first Reel.</strong> That little detail made me curious about you. We started talking about everything, and when you told me you had watched the movie I recommended, I felt listened to. I still remember that.</p>
+            <p>You asked if I liked reading books. I said I preferred movies and recommended <em>The Hangover</em>. Then I told you I went to the gym and flexed my bicep. Very smooth, Stefanino. 😂</p>
+            <p>You gave me your Instagram. I didn't text for two days… and <strong>you sent me the first Reel.</strong> When you told me you had actually watched the movie I recommended, I felt truly listened to.</p>
           </div>
         </div>
-        <div class="story-grid">
-          <article class="story-card">
-            <span class="card-icon">📩</span><p class="eyebrow">THE FIRST MESSAGE</p>
-            <h3>You texted first.</h3>
-            <p>A Reel, two days later. A tiny beginning that opened a whole new world.</p>
+
+        <div class="story-cards-row reveal">
+          <article class="glass-card">
+            <div class="icon-circle">📩</div>
+            <span class="eyebrow">THE FIRST MOVE</span>
+            <h4>You texted first</h4>
+            <p>A Reel, two days later. A tiny notification that opened a whole new universe for both of us.</p>
           </article>
-          <article class="story-card">
-            <span class="card-icon">💍</span><p class="eyebrow">DECEMBER 18, 2025</p>
-            <h3>“Will you be my girlfriend?”</h3>
-            <p>After two weeks of talking, I asked you to be mine — after a Reel, obviously. AHAHAHA.</p>
+          <article class="glass-card">
+            <div class="icon-circle">💍</div>
+            <span class="eyebrow">18 DECEMBER 2025</span>
+            <h4>“Will you be my girlfriend?”</h4>
+            <p>After two weeks of talking nonstop, I asked you to be mine — right after a Reel, obviously. AHAHAHA.</p>
           </article>
-          <article class="story-card">
-            <span class="card-icon">🌷</span><p class="eyebrow">APRIL</p>
-            <h3>A difficult chapter.</h3>
-            <p>We went through a painful moment, separated, and eventually found our way back to each other. This is part of our story too — not something to hide or rewrite.</p>
+          <article class="glass-card">
+            <div class="icon-circle">🌷</div>
+            <span class="eyebrow">STRONGER TOGETHER</span>
+            <h4>Choosing each other</h4>
+            <p>Even through hard chapters and distance, we learned to listen, grow, and choose each other every single day.</p>
           </article>
-        </div>
-        <div class="timeline-wrap">
-          <div class="section-heading compact">
-            <p class="eyebrow">LOOKING BACK</p><h2>The timeline of <em>us</em></h2>
-          </div>
-          <div class="timeline">
-            <div class="timeline-item"><span class="timeline-dot"></span><small>THE FIRST NIGHT</small><h3>OmeTV</h3><p>A white T-shirt, two seconds of your face, movies, hobbies and a very questionable bicep flex.</p></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><small>THE FIRST DAYS</small><h3>Instagram & that Reel</h3><p>You reached out first. We kept talking, and I started falling for the person behind the screen.</p></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><small>18 DECEMBER 2025</small><h3>Officially us</h3><p>Two weeks after we started talking, you became my girlfriend.</p></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><small>APRIL 2026</small><h3>A hard lesson, then a new beginning</h3><p>We faced a painful break and later chose to try again. The exact dates and details can be added when we build this chapter together.</p></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><small>18 NOVEMBER 2026</small><h3>Eleven months</h3><p>Still here, still learning, still writing our story.</p></div>
-          </div>
         </div>
       </section>
 
-      <section id="memories" class="content-section section-shell soft-section">
-        <div class="section-heading">
-          <p class="eyebrow">THE LITTLE THINGS WE KEEP</p>
-          <h2>Our <em>memories</em></h2>
-          <p>Photos, letters and milestones. This space will grow with us.</p>
-        </div>
-        <div class="feature-grid">
-          <a class="feature-card" href="#monthsaries"><span class="feature-art art-calendar">♡<small>MONTH BY MONTH</small></span><span class="feature-title">Our Monthsaries</span><span class="feature-desc">Every month deserves its own little celebration.</span><span class="feature-arrow">↗</span></a>
-          <a class="feature-card" href="#birthdays"><span class="feature-art art-cake">✧<small>MAKE A WISH</small></span><span class="feature-title">Her Birthdays</span><span class="feature-desc">A home for every birthday surprise, starting with the original site.</span><span class="feature-arrow">↗</span></a>
-          <a class="feature-card" href="#letters"><span class="feature-art art-letter">Dear you,<small>ALWAYS YOURS</small></span><span class="feature-title">My Letters to You</span><span class="feature-desc">The words I wrote, exactly as I wrote them.</span><span class="feature-arrow">↗</span></a>
-          <a class="feature-card" href="#photos"><span class="feature-art art-photo">▧<small>FAVOURITE MOMENTS</small></span><span class="feature-title">Photo Albums</span><span class="feature-desc">A gallery waiting for your favourite pictures.</span><span class="feature-arrow">↗</span></a>
+      <!-- MEMORIES & LETTERS -->
+      <section id="memories" class="content-section section-shell alt-bg">
+        <div class="section-heading reveal">
+          <span class="eyebrow">KEEPSAKES & WORDS</span>
+          <h2>Our <em>Letters</em> & Milestones</h2>
+          <p>Tap any wax-sealed envelope to read my exact words to you, month after month.</p>
         </div>
 
-        <div id="monthsaries" class="subsection">
-          <div class="subsection-heading"><div><p class="eyebrow">ONE MONTH AT A TIME</p><h3>Our <em>monthsaries</em></h3></div><span class="pill">02 — 10 · 11 coming</span></div>
-          <div id="monthsary-list" class="monthsary-list"></div>
+        <div id="letters" class="letters-showcase reveal">
+          <div id="letter-list" class="envelope-grid"></div>
         </div>
-        <div id="letters" class="subsection">
-          <div class="subsection-heading"><div><p class="eyebrow">FROM MY HEART</p><h3>My letters <em>to you</em></h3></div><span class="pill">8 letters</span></div>
-          <p class="subsection-intro">Open an envelope to read each letter. The original wording is preserved.</p>
-          <div id="letter-list" class="letter-list"></div>
-        </div>
-        <div id="photos" class="subsection">
-          <div class="subsection-heading"><div><p class="eyebrow">A PLACE FOR EVERY PICTURE</p><h3>Our photo <em>albums</em></h3></div></div>
-          <div class="empty-gallery"><span>✿</span><h3>Our memories belong here</h3><p>Add your favourite photos in <code>assets/images/</code> and we'll turn this into a real album.</p></div>
-        </div>
-        <div id="birthdays" class="subsection birthday-panel">
-          <div><p class="eyebrow">THE FIRST SPECIAL WEBSITE</p><h3>Her <em>birthday archive</em></h3><p>The birthday experience deserves to stay here: the cake, the animated letter, the kitty game, the quiz, the special-date game and the LANY moment.</p><p class="small-note">The original birthday code hasn't been added to this new project yet. We'll merge it here when you send it, so none of those surprises get lost.</p></div>
-          <div class="birthday-stamp">HAPPY<br><strong>BIRTHDAY</strong><br>CHRIZZA ♡</div>
+
+        <div class="subsection reveal">
+          <div class="sub-header">
+            <h3>Month by Month <em>Highlights</em></h3>
+            <span class="badge-pill">11 Months & Counting</span>
+          </div>
+          <div id="monthsary-list" class="milestone-grid"></div>
         </div>
       </section>
 
+      <!-- FOR CHRIZZA -->
       <section id="for-chrizza" class="content-section section-shell">
-        <div class="section-heading">
-          <p class="eyebrow">A WORLD THAT IS YOURS</p><h2>Just for <em>you</em></h2>
-          <p>Not only our relationship. You, your little world, and all the things that make you special.</p>
+        <div class="bucket-layout glass-panel reveal">
+          <div class="bucket-info">
+            <span class="eyebrow">OUR FUTURE TOGETHER</span>
+            <h2>The <em>Bucket List</em></h2>
+            <p>All the simple and extraordinary things waiting for us when the distance finally disappears.</p>
+            <div class="promise-box">
+              <span>♡</span> "Soon I won't have to explain everything with words through a screen. I'll be right there beside you."
+            </div>
+          </div>
+          <ul class="checklist" id="bucket-list">
+            <li data-idx="0"><span class="chk">♡</span> Finally meet in person and hold you tight</li>
+            <li data-idx="1"><span class="chk">♡</span> Watch a movie side by side (no screen between us)</li>
+            <li data-idx="2"><span class="chk">♡</span> Meet King Tortoro in Bugo</li>
+            <li data-idx="3"><span class="chk">♡</span> Take our first real photo together</li>
+            <li data-idx="4"><span class="chk">♡</span> Eat together & let me steal your food</li>
+            <li data-idx="5"><span class="chk">♡</span> Look at the same Moon side by side</li>
+          </ul>
         </div>
-        <div class="feature-grid three">
-          <article class="feature-card static-card"><span class="feature-art art-flower">✿<small>THE GIRL I LOVE</small></span><span class="feature-title">About Chrizza</span><span class="feature-desc">Your favourite things, little habits, dreams and everything that makes you you.</span></article>
-          <article class="feature-card static-card"><span class="feature-art art-reasons">100<small>LITTLE REASONS</small></span><span class="feature-title">100 Reasons I Love You</span><span class="feature-desc">One reason at a time, with more to add whenever I think of another.</span></article>
-          <article class="feature-card static-card"><span class="feature-art art-surprise">?</span><span class="feature-title">Little Surprises</span><span class="feature-desc">Secret notes, digital gifts and unexpected messages.</span></article>
-        </div>
-        <div class="bucket-card"><div><p class="eyebrow">THE FUTURE IS WAITING</p><h3>Our <em>bucket list</em></h3><p>All the little and big things we still want to experience together.</p></div><ul><li>☐ Finally meet and hug for real</li><li>☐ Watch a movie side by side</li><li>☐ Take our first photo together</li><li>☐ Make ordinary days our favourite memories</li><li>☐ Add our own dreams here</li></ul></div>
       </section>
 
-      <section id="play" class="content-section section-shell soft-section">
-        <div class="section-heading">
-          <p class="eyebrow">TORTORO'S WORLD</p><h2>Let's <em>play with Tortoro</em></h2><p>Two special games dedicated to your beloved kitty in Cagayan de Oro (Bugo)!</p>
-        </div>
-        
-        <div class="play-grid-dual">
-          <!-- GAME 1: COZY TAMAGOTCHI / CARE GAME -->
-          <article class="game-card cozy-card">
-            <div class="game-top"><span class="eyebrow">BUGO HOUSE · COZY CARE</span><span class="game-label">GAME 1</span></div>
-            <div class="cozy-room">
-              <div class="room-window">🌅 Bugo, CDO</div>
-              <img src="assets/images/tortoro.jpg" alt="Tortoro" class="cozy-cat-avatar" id="cozy-cat-img">
-              <h3 id="cozy-cat-name">Tortoro's Room 🐾</h3>
-              <p class="cozy-status-text" id="cozy-status">Tortoro is relaxing in his favorite spot in Bugo...</p>
-              
-              <div class="stats-bars">
-                <div class="stat-row">
-                  <span>🍖 Hunger: <strong id="hunger-val">80</strong>%</span>
-                  <div class="bar-container"><div class="bar-fill" id="hunger-bar" style="width: 80%"></div></div>
-                </div>
-                <div class="stat-row">
-                  <span>💖 Happiness: <strong id="happy-val">90</strong>%</span>
-                  <div class="bar-container"><div class="bar-fill pink-fill" id="happy-bar" style="width: 90%"></div></div>
-                </div>
-              </div>
-
-              <div class="game-controls cozy-controls">
-                <button id="feed-btn">🍖 Feed Snack</button>
-                <button id="pet-btn">🥰 Pet Tortoro</button>
-                <button id="sleep-btn">💤 Nap Time</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- GAME 2: ARCADE RUNNER -->
-          <article class="game-card tortoro-card">
-            <div class="game-top"><span class="eyebrow">BUGO ADVENTURE · ARCADE RUNNER</span><span class="game-label">GAME 2</span></div>
-            <div class="arcade-header-info">
-              <h3>Tortoro's Heart Hunt</h3>
-              <p>Help Tortoro jump across obstacles in Bugo and collect hearts!</p>
-              <div class="game-score">Hearts collected: <strong id="score">0</strong></div>
-            </div>
-            
-            <canvas id="game-canvas" width="640" height="260" aria-label="Tortoro heart collection game"></canvas>
-            
-            <div class="game-controls">
-              <button id="left-btn" aria-label="Move left">←</button>
-              <button id="jump-btn">Jump ↑</button>
-              <button id="right-btn" aria-label="Move right">→</button>
-              <button id="restart-game" class="reset-btn">Restart</button>
-            </div>
-            <p class="game-hint" id="game-hint">Collect the floating hearts. Avoid the little obstacles!</p>
-          </article>
+      <!-- TORTORO'S GAMES (SOPHISTICATED CANVAS GAMES) -->
+      <section id="play" class="content-section section-shell alt-bg">
+        <div class="section-heading reveal">
+          <span class="eyebrow">INTERACTIVE ARCADE · CAGAYAN DE ORO</span>
+          <h2>Tortoro's <em>Playground</em></h2>
+          <p>Two full interactive games starring your handsome grey tabby in Bugo!</p>
         </div>
 
-        <!-- LOVE QUIZ SECTION -->
-        <div class="quiz-container-box">
-          <div class="game-card quiz-card">
-            <div class="game-top"><span class="eyebrow">HOW WELL DO YOU KNOW US?</span><span class="game-label">QUIZ</span></div>
-            <div class="quiz-decoration">♡</div>
-            <h3>Our little love quiz</h3>
-            <p>A fun mini quiz based on our story.</p>
-            <div id="quiz-box">
-              <div class="quiz-progress" id="quiz-progress">QUESTION 1 / 5</div>
-              <h4 id="quiz-question"></h4>
-              <div id="quiz-options" class="quiz-options"></div>
-              <p id="quiz-feedback" class="quiz-feedback"></p>
-              <button id="quiz-next" class="button button-primary hidden">Next question →</button>
+        <div class="games-master-grid">
+          <!-- GAME 1: COZY ROOM SIMULATOR -->
+          <div class="game-cabinet glass-panel reveal">
+            <div class="cabinet-header">
+              <div>
+                <span class="eyebrow">GAME 01 · VIRTUAL PET SIMULATOR</span>
+                <h3>Tortoro's Cozy House in Bugo</h3>
+              </div>
+              <span class="level-badge" id="cozy-level">Affection Lv. 1</span>
+            </div>
+            <p class="game-desc">Pet Tortoro directly on the screen, toss his yarn ball, feed him fish treats, or switch day/night in Bugo!</p>
+
+            <div class="canvas-wrapper">
+              <canvas id="cozy-canvas" width="600" height="340"></canvas>
+              <div class="canvas-toast" id="cozy-toast">Tap Tortoro to pet him! 🐾</div>
+            </div>
+
+            <div class="pet-bars">
+              <div class="p-bar">
+                <div class="p-bar-top"><span>🐟 Hunger</span><span id="stat-hunger">85%</span></div>
+                <div class="p-track"><div class="p-fill fill-peach" id="bar-hunger" style="width:85%"></div></div>
+              </div>
+              <div class="p-bar">
+                <div class="p-bar-top"><span>💖 Happiness</span><span id="stat-happy">90%</span></div>
+                <div class="p-track"><div class="p-fill fill-pink" id="bar-happy" style="width:90%"></div></div>
+              </div>
+              <div class="p-bar">
+                <div class="p-bar-top"><span>⚡ Energy</span><span id="stat-energy">80%</span></div>
+                <div class="p-track"><div class="p-fill fill-lav" id="bar-energy" style="width:80%"></div></div>
+              </div>
+            </div>
+
+            <div class="cabinet-controls">
+              <button class="game-btn" id="act-feed">🐟 Feed Fish</button>
+              <button class="game-btn" id="act-toy">🧶 Toss Yarn</button>
+              <button class="game-btn" id="act-sleep">💤 Nap / Wake</button>
+              <button class="game-btn" id="act-time">🌅 Day / Sunset</button>
+            </div>
+          </div>
+
+          <!-- GAME 2: ENDLESS RUNNER ARCADE -->
+          <div class="game-cabinet glass-panel reveal">
+            <div class="cabinet-header">
+              <div>
+                <span class="eyebrow">GAME 02 · ARCADE PLATFORM RUNNER</span>
+                <h3>Tortoro's Bugo Adventure</h3>
+              </div>
+              <div class="score-pills">
+                <span class="level-badge">Score: <strong id="arc-score">0</strong></span>
+                <span class="level-badge best">Best: <strong id="arc-best">0</strong></span>
+              </div>
+            </div>
+            <p class="game-desc">Double-jump over crabs & coconuts, duck under tropical birds, and grab golden fish & love magnets!</p>
+
+            <div class="canvas-wrapper">
+              <canvas id="arcade-canvas" width="600" height="340"></canvas>
+              <div id="arcade-overlay" class="arcade-overlay">
+                <h4>Ready to Explore Bugo?</h4>
+                <p>Jump (↑ / Space / Tap) · Double Jump · Duck (↓)</p>
+                <button class="btn-romantic" id="arc-start-btn">Start Adventure 🐾</button>
+              </div>
+            </div>
+
+            <div class="cabinet-controls arcade-pad">
+              <button class="game-btn big-pad" id="pad-jump">⬆ Jump (x2)</button>
+              <button class="game-btn big-pad" id="pad-duck">⬇ Duck / Slide</button>
             </div>
           </div>
         </div>
+
+        <!-- LOVE QUIZ -->
+        <div class="quiz-cabinet glass-panel reveal">
+          <div class="cabinet-header">
+            <div>
+              <span class="eyebrow">BONUS MINI-GAME · TRIVIA</span>
+              <h3>How Well Do You Know Our Story?</h3>
+            </div>
+            <span class="level-badge" id="quiz-progress">1 / 5</span>
+          </div>
+          <h4 id="quiz-question" class="quiz-q"></h4>
+          <div id="quiz-options" class="quiz-grid"></div>
+          <p id="quiz-feedback" class="quiz-feedback"></p>
+          <button id="quiz-next" class="btn-romantic hidden">Next Question →</button>
+        </div>
       </section>
 
-      <section class="closing section-shell">
-        <div class="closing-flower">✿</div><p class="eyebrow">AND THIS IS ONLY THE BEGINNING</p>
+      <!-- CLOSING -->
+      <section class="closing section-shell reveal">
+        <div class="wax-seal large">♡</div>
+        <span class="eyebrow">AND THIS IS ONLY THE BEGINNING</span>
         <h2>More chapters,<br><em>more memories,</em><br>more us.</h2>
         <p>From a random night on OmeTV to eleven months of choosing each other. I can't wait to see what we write next.</p>
         <div class="signature">Always yours,<br><span>Stefanino ♡</span></div>
       </section>
     </main>
-    <footer><span>Made with love, just for Chrizza ♡</span><span>Chrizza's World · Est. 2025</span></footer>
+
+    <footer>
+      <span>Crafted with all my heart for Chrizza ♡</span>
+      <span>Chrizza's World · Italy ⇄ Philippines</span>
+    </footer>
   </div>
 
-  <div id="letter-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <!-- LETTER MODAL -->
+  <div id="letter-modal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-backdrop" data-close="true"></div>
-    <article class="letter-paper">
-      <button class="modal-close" id="close-letter" aria-label="Close letter">×</button>
-      <p class="eyebrow">A LETTER FROM STEFANINO</p><h2 id="modal-title"></h2>
+    <article class="letter-sheet">
+      <button class="modal-close" id="close-letter" aria-label="Close">×</button>
+      <div class="sheet-top">
+        <span class="eyebrow">A LETTER FROM STEFANINO</span>
+        <h2 id="modal-title"></h2>
+      </div>
       <div id="modal-letter-body" class="letter-body"></div>
-      <p class="letter-signature">Always yours,<br><span>Stefanino ♡</span></p>
+      <div class="letter-footer">
+        <p>Always yours,<br><span>Stefanino ♡</span></p>
+      </div>
     </article>
   </div>
+
   <script src="js/letters.js"></script>
   <script src="js/app.js"></script>
 </body>
