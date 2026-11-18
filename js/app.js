@@ -173,7 +173,7 @@ function drawGame(){
   ctx.fillStyle="#faedf1";
   ctx.fillRect(0,0,640,260);
 
-  // Background tropical hills / clouds
+  // Background tropical hills
   ctx.fillStyle="#f0dce5";
   for(let i=0;i<8;i++){
     ctx.beginPath();
